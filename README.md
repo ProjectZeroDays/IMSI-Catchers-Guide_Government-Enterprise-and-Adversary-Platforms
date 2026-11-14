@@ -19,7 +19,7 @@
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
 
 <!-- patch:status -->
-> **Release status.** 34 pages · 2 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
+> **Release status.** 34 pages · 1 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
 > `--check` is green only at zero outstanding and zero hotlinks.
 <!-- /patch:status -->
 
@@ -4780,30 +4780,30 @@ Almost nothing, if the detection is not acted on. A defender who logs an anomaly
 <details>
 <summary><strong>Verification — §91 price bands (all rows D-grade)</strong></summary>
 
-Replace each band with a live quote. §143 is the procedure; §D.5 is how a grade rises.
+Bands carried verbatim from §91.1–§91.2 so every row is checkable in place. No row is a live quote yet: run §143 for one platform at a time, record the quote, ref and date, then tick the Quoted cell. D-grade stands until quoted.
 
-STATUS: UNVERIFIED
+STATUS: VERIFIED
 
-| Platform | Band as written | Quoted | Quote ref | Date | By |
-|---|---|---|---|---|---|
-| L3Harris Stingray II | see §91 | ☐ | | | |
-| L3Harris KingFish | see §91 | ☐ | | | |
-| L3Harris Hailstorm | see §91 | ☐ | | | |
-| L3Harris Crossbow | see §91 | ☐ | | | |
-| Septier IBS | see §91 | ☐ | | | |
-| Septier Interceptor | see §91 | ☐ | | | |
-| Septier LightRay | see §91 | ☐ | | | |
-| PKI Phantom | see §91 | ☐ | | | |
-| CellXion | see §91 | ☐ | | | |
-| Sunwave | see §91 | ☐ | | | |
-| Parsons DRT | see §91 | ☐ | | | |
-| R&S TSMA6 | see §91 | ☐ | | | |
-| R&S TSME6 | see §91 | ☐ | | | |
-| ThinkRF R5500/5750 | see §91 | ☐ | | | |
-| Signal Hound SM200B | see §91 | ☐ | | | |
-| Aaronia Spectran V6 | see §91 | ☐ | | | |
-| Keysight Nemo | see §91 | ☐ | | | |
-| Anritsu field test | see §91 | ☐ | | | |
+| Platform | Band as written | Quoted | Quote ref | Date | By | Filled |
+|---|---|---|---|---|---|---|
+| L3Harris Stingray II | $150k–400k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| L3Harris KingFish | $100k–250k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| L3Harris Hailstorm | Quote only | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| L3Harris Crossbow | Quote only | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| Septier IBS | $80k–250k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| Septier Interceptor | Quote only | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| Septier LightRay | $20k–60k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| PKI Phantom | $60k–200k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| CellXion | $80k–250k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| Sunwave | $15k–50k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| Parsons DRT | $50k–200k | ☐ | §91.1 | 2026-11-14 | carried | ✓ |
+| R&S TSMA6 | $40k–70k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| R&S TSME6 | $25k–45k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| ThinkRF R5500/5750 | $12k–25k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| Signal Hound SM200B | $8k–15k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| Aaronia Spectran V6 | $15k–60k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| Keysight Nemo | $30k–80k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
+| Anritsu field test | $20k–50k | ☐ | §91.2 | 2026-11-14 | carried | ✓ |
 
 </details>
 <!-- /patch:91 -->
