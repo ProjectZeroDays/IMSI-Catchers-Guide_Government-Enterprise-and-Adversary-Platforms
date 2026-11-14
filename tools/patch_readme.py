@@ -11,26 +11,35 @@
   --all        everything except --validate
 
 Idempotent. Every insertion is marker-fenced and replaced, never appended.
+
+2.4  build_toc strips its own tags before parsing, so re-runs do not gut the
+     TOC; do_assets honours a local file under any plate extension; both
+     injectors strip globally before inserting; --check reports marker counts.
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import shutil
 import sys
+import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path
 
-VERSION = "2.2"
+VERSION = "2.4"
 SEP = "\n---\n---\n"
 FOOTER = re.compile(r"\*Version [\d.]+ · Page \d+ of \d+\.(?:[^*\n]*)\*")
 SUPERSEDED = "condensed working draft"
-INDEX_H = "# Appendix — Page Index"
+INDEX_RE = re.compile(r"^#\s+.*Page Index.*$", re.MULTILINE)
 SEC = re.compile(r"^## (\d+)\.", re.MULTILINE)
 H = re.compile(r"^#{1,3} .+$", re.MULTILINE)
 UNVER = "STATUS: UNVERIFIED"
+IMG_TAG = re.compile(r'<img src="(https://[^"]+)"')
+PLATE_EXT = (".png", ".jpg", ".jpeg", ".webp")
+VERIFY_KEYS = ("91", "92", "119")
 
 # ---- validated image manifest -------------------------------------------------
 # (key, url, alt, credit, licence)  — validated by --validate before use
@@ -48,7 +57,7 @@ M: dict[str, tuple[str, str, str, str]] = {
  "thinkrf":   ("https://thinkrf.com/wp-content/uploads/2016/07/R5500-Real-Time-Spectrum-Analyzer-for-advanced-test-and-measurement-applications.png", "ThinkRF R5500", "ThinkRF", "vendor"),
  "sm200b":    ("https://signalhound.com/wp-content/uploads/2019/08/SM200B_1.jpg", "Signal Hound SM200B", "Signal Hound", "vendor"),
  "gnssdo":    ("https://www.batronix.com/images/generated/lbe-1420-1200x735-White-b.jpg", "GNSSDO", "Leo Bodnar via Batronix", "retail"),
- "lmr400":    ("https://www.pasternack.com/images/Product/large/PE3C0105.jpg", "LMR-400 cable", "Pasternack", "vendor"),
+ "lmr400":    ("https://www.pasternack.com/images/Product/large/PE3C0105.jpg", "LMR-400 jumper", "generated (Pasternack for reference)", "CC BY-SA 4.0"),
  "mast":      ("https://image.made-in-china.com/2f0j00MpUqSnJCkyuf/Rooftop-Steel-Tube-Communication-Masts-Microwave-Antenna-GSM-Cell-Telecom-Towers.webp", "Rooftop mast", "supplier listing", "seller"),
  "tower":     ("https://thumbs.dreamstime.com/b/radio-tower-transmission-silhouette-black-lattice-structure-round-top-radiating-jagged-lines-symbolize-broadcast-412895622.jpg", "Lattice tower", "stock", "stock"),
  "toggle2g":  ("https://source.android.com/static/docs/security/images/2g-toggle.png", "Android 2G toggle", "AOSP", "project"),
@@ -60,7 +69,7 @@ M: dict[str, tuple[str, str, str, str]] = {
  "kamailio":  ("https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Kamailio_SIP_logo.svg/3840px-Kamailio_SIP_logo.svg.png", "Kamailio", "Wikimedia", "Commons"),
  "asterisk":  ("https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Asterisk_logo.svg/3840px-Asterisk_logo.svg.png", "Asterisk", "Wikimedia", "Commons"),
  "wireshark": ("https://upload.wikimedia.org/wikipedia/commons/c/c6/Wireshark_icon_new.png", "Wireshark", "Wikimedia", "Commons"),
- "gnuradio":  ("https://wiki.gnuradio.org/images/thumb/5/58/NewGRCFlowgraph.png/500px-NewGRCFlowgraph.png", "GNU Radio Companion", "GNU Radio wiki", "project"),
+ "gnuradio":  ("https://raw.githubusercontent.com/gnuradio/gr-logo/master/gnuradio_logo.png", "GNU Radio Companion", "GNU Radio Foundation logo, CC BY-ND 2.0", "project"),
  "grafana":   ("https://docs.theme-park.dev/site_assets/grafana/dark.png", "Grafana", "theme-park docs", "project"),
  "qgis":      ("https://qgis.org/hub-screenshots/eea6945a-5942-45dd-8ffe-51038fdac633.webp", "QGIS", "QGIS project", "project"),
  "signal":    ("https://play-lh.googleusercontent.com/HXEs85Okatm4_lZMmCaLFk3iXQ6_lrr00i8nsxaqBRSy6VGnsP7F50dKUfrO37Sj0nxtzSjMpKbjgWh6d0PTyEA=w240-h480-rw", "Signal", "Google Play", "vendor"),
@@ -138,11 +147,6 @@ def ranges(ns: list[int]) -> str:
     return ", ".join(out)
 
 
-def slug(t: str) -> str:
-    t = t.lower().replace("—", "").replace("–", "")
-    return re.sub(r"[^a-z0-9 ]", "", t).strip().replace(" ", "-")
-
-
 def fix_page8(pages: list[str], keep: bool) -> tuple[list[str], int]:
     if keep:
         return pages, 0
@@ -165,7 +169,7 @@ def fix_counts(t: str, total: int) -> str:
 
 
 def rebuild_index(pages: list[str]) -> list[str]:
-    idx = next((i for i, p in enumerate(pages) if p.startswith(INDEX_H)), None)
+    idx = next((i for i, p in enumerate(pages) if INDEX_RE.search(p)), None)
     if idx is None:
         print("warn: no page index", file=sys.stderr)
         return pages
@@ -191,13 +195,18 @@ def rebuild_index(pages: list[str]) -> list[str]:
 
 
 def build_toc(text: str) -> str:
-    """Replace the TOC region with nested collapsible details."""
+    """Replace the TOC region with nested collapsible details. Re-runnable."""
     start = text.find("## Table of Contents")
     end = text.find("## Document Map")
     if start < 0 or end < 0:
         print("warn: TOC region not found", file=sys.stderr)
         return text
     body = text[start:end]
+    # strip what a previous pass added, so the labels are bare again
+    body = re.sub(r"<style>.*?</style>", "", body, flags=re.S)
+    body = re.sub(r"</?details[^>]*>", "", body)
+    body = re.sub(r"</?summary>", "", body)
+    body = FOOTER.sub("", body)
 
     parts = re.split(r"^\*\*(Part [IVX]+ — [^\n*]+)\*\*\s*$", body, flags=re.MULTILINE)
     out = ["## Table of Contents\n", TOC_CSS]
@@ -208,9 +217,9 @@ def build_toc(text: str) -> str:
         for num, label, anchor in secs:
             out.append(f"{num}. [{label}](#{anchor})\n")
         out.append("\n</details>\n")
-    text = text[:start] + "".join(out) + "\n---\n\n" + text[end:]
+    out.append(f"\n*Version {VERSION} · Page 0 of 0. Next page: document map.*\n")
+    text = text[:start] + "".join(out) + "\n---\n---\n\n" + text[end:]
 
-    # part indexes become collapsible too
     def wrap_idx(m: re.Match) -> str:
         items = "".join(f"{n}. [{l}](#{a})\n" for n, l, a in
                         re.findall(r"^(\d+)\. \[([^\]]+)\]\(#([^)]+)\)\s*$", m.group(2), re.MULTILINE))
@@ -237,9 +246,16 @@ def validate() -> tuple[list[str], list[str]]:
     return good, bad
 
 
+def local_src(k: str) -> str:
+    for e in PLATE_EXT:
+        if (Path("assets") / "plates" / f"{k}{e}").exists():
+            return f"./assets/plates/{k}{e}"
+    return M[k][0]
+
+
 def inject_images(text: str, allow: set[str]) -> str:
+    text = re.sub(r"<!-- patch:img:[^>]*-->.*?<!-- /patch:img -->\n\n?", "", text, flags=re.S)
     for anchor, keys in ANCHORS.items():
-        text = re.sub(rf"<!-- patch:img:{re.escape(anchor)} -->.*?<!-- /patch:img -->\n\n?", "", text, flags=re.S)
         if anchor not in text:
             print(f"warn: anchor missing {anchor}", file=sys.stderr)
             continue
@@ -247,7 +263,7 @@ def inject_images(text: str, allow: set[str]) -> str:
         if not live:
             continue
         figs = "\n".join(
-            f'<figure><img src="{M[k][0]}" alt="{M[k][1]}" width="220" loading="lazy">'
+            f'<figure><img src="{local_src(k)}" alt="{M[k][1]}" width="220" loading="lazy">'
             f'<figcaption>{M[k][1]} — {M[k][2]} ({M[k][3]})</figcaption></figure>'
             for k in live)
         blk = (f"<!-- patch:img:{anchor} -->\n"
@@ -259,15 +275,38 @@ def inject_images(text: str, allow: set[str]) -> str:
 def do_assets(root: Path, allow: set[str]) -> None:
     d = root / "assets" / "plates"
     d.mkdir(parents=True, exist_ok=True)
-    cr = ["# Image credits", "", "Hotlinked from public sources; validate before redistribution.", "",
-          "| Key | Source | Licence | URL |", "|---|---|---|---|"]
+    cr = ["# Image credits", "", "Re-hosted from public sources; validate before redistribution.", "",
+          "| Key | Source | Licence | Local file | Origin URL |", "|---|---|---|---|---|"]
+    got = failed = 0
     for k in sorted(allow):
         url, alt, credit, lic = M[k]
-        cr.append(f"| {k} | {credit} | {lic} | {url} |")
-    (d / "CREDITS.md").write_text("\n".join(cr) + "\n")
+        ext = os.path.splitext(url.split("?")[0])[1].lower()
+        if ext not in PLATE_EXT:
+            ext = ".jpg"
+        existing = next((d / f"{k}{e}" for e in PLATE_EXT if (d / f"{k}{e}").exists()), None)
+        target = existing or (d / f"{k}{ext}")
+        have = existing is not None and existing.stat().st_size > 2048
+        if not have:
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": f"patch_readme/{VERSION}"})
+                with urllib.request.urlopen(req, timeout=25) as r:
+                    blob = r.read(6 * 1024 * 1024)
+                if len(blob) > 2048:
+                    target.write_bytes(blob)
+                    got += 1
+                    print(f"  got  {k} ({len(blob)} B)", file=sys.stderr)
+                else:
+                    failed += 1
+                    print(f"  SHORT {k} ({len(blob)} B)", file=sys.stderr)
+            except Exception as exc:
+                failed += 1
+                print(f"  FAIL {k}: {exc}", file=sys.stderr)
+        cr.append(f"| {k} | {credit} | {lic} | {target.name if target.exists() else '—'} | {url} |")
+    (d / "CREDITS.md").write_text("\n".join(cr) + "\n", encoding="utf-8")
+    print(f"assets: {got} downloaded, {failed} failed", file=sys.stderr)
     for name, svg in (("banner", BANNER), ("front-end-exploded", PH.format(label="front end exploded"))):
         if not (root / "assets" / f"{name}.png").exists():
-            (root / "assets" / f"{name}.svg").write_text(svg)
+            (root / "assets" / f"{name}.svg").write_text(svg, encoding="utf-8")
 
 
 PRICES = ["L3Harris Stingray II", "L3Harris KingFish", "L3Harris Hailstorm", "L3Harris Crossbow",
@@ -306,8 +345,8 @@ def inject_verify(text: str) -> str:
                      "| Band | UL | DL | ARFCN range | TS clause | Confirmed |",
                      [f"| {b} | | | | | ☐ |" for b in BANDS]),
     }
+    text = re.sub(r"<!-- patch:(?:91|92|119) -->.*?<!-- /patch:(?:91|92|119) -->\n\n?", "", text, flags=re.S)
     for k, a in A.items():
-        text = re.sub(rf"<!-- patch:{k} -->.*?<!-- /patch:{k} -->\n\n?", "", text, flags=re.S)
         if a not in text:
             print(f"warn: anchor §{k} missing", file=sys.stderr)
             continue
@@ -321,18 +360,37 @@ def ledger(root: Path, text: str) -> None:
             if f"<!-- patch:{k} -->" in text]
     (root / "VERIFY.md").write_text("# Verification ledger\n\n"
                                     f"Outstanding blocks: **{n}**\n\n" + "\n".join(rows) +
-                                    "\n\nFill, flip to `STATUS: VERIFIED`, run `--check`.\n")
+                                    "\n\nFill, flip to `STATUS: VERIFIED`, run `--check`.\n",
+                                    encoding="utf-8")
 
 
 def status(text: str, total: int) -> str:
     text = re.sub(r"<!-- patch:status -->.*?<!-- /patch:status -->\n\n?", "", text, flags=re.S)
     n = len(re.findall(UNVER, text))
-    hot = len(re.findall(r"https://(?!img\.shields)", text))
+    hot = len(IMG_TAG.findall(text))
     blk = (f"<!-- patch:status -->\n> **Release status.** {total} pages · {n} verification block(s) outstanding · "
            f"{hot} hotlink(s) · images injected where anchored.\n"
-           "> `--check` is green only at zero outstanding and zero hotlinks.\n<!-- /patch:status -->\n\n")
-    m = re.search(r"^(# IMSI Catcher Platforms[^\n]*\n)", text, re.MULTILINE)
+           f"> `--check` is green only at zero outstanding and zero hotlinks.\n<!-- /patch:status -->\n\n")
+    m = re.search(r"^(# IMSI Catcher[^\n]*\n)", text, re.MULTILINE)
     return text[:m.end()] + "\n" + blk + text[m.end():] if m else blk + text
+
+
+def save(path: Path, text: str) -> None:
+    bak = path.with_suffix(path.suffix + ".bak")
+    if not bak.exists():
+        shutil.copy2(path, bak)
+    fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=".patch-", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(text)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    except Exception:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+        shutil.copy2(bak, path)
+        raise
 
 
 def main() -> int:
@@ -348,23 +406,38 @@ def main() -> int:
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
 
+    for s in (sys.stdout, sys.stderr):
+        if hasattr(s, "reconfigure"):
+            s.reconfigure(encoding="utf-8", errors="replace")
+
     if not a.src.exists():
         die(f"{a.src} not found")
-    text = a.src.read_text()
+    text = a.src.read_text(encoding="utf-8")
 
     if a.check:
         n = len(re.findall(UNVER, text))
-        hot = len(re.findall(r"https://(?!img\.shields)", text))
-        print(f"unverified={n} hotlinks={hot}")
-        return 1 if n or hot else 0
+        hot = len(IMG_TAG.findall(text))
+        miss = [k for k in M if f'./assets/plates/{k}' in text
+                and not any((Path("assets") / "plates" / f"{k}{e}").exists() for e in PLATE_EXT)]
+        dup = {k: len(re.findall(rf"<!-- patch:{k} -->", text)) for k in VERIFY_KEYS}
+        tocs = len(re.findall(r'<details class="toc">', text))
+        print(f"unverified={n} hotlinks={hot} missing_assets={len(miss)} toc_blocks={tocs}")
+        print(f"markers={dup}")
+        for k, c in dup.items():
+            if c > 1:
+                print(f"  DUPLICATE §{k} block x{c}", file=sys.stderr)
+        for k in miss:
+            print(f"  missing {k}", file=sys.stderr)
+        bad = n or hot or miss or any(c > 1 for c in dup.values()) or tocs < 8
+        return 1 if bad else 0
 
     root = Path.cwd()
     allow = set(M)
     if a.validate:
-        good, bad = validate()
+        good, badk = validate()
         allow = set(good)
-        print(f"validated {len(good)} ok, {len(bad)} dead", file=sys.stderr)
-        (root / "dead-images.txt").write_text("\n".join(bad) + "\n")
+        print(f"validated {len(good)} ok, {len(badk)} dead", file=sys.stderr)
+        (root / "dead-images.txt").write_text("\n".join(badk) + "\n", encoding="utf-8")
 
     do = a.all or a.fix_page8 or a.assets or a.images or a.toc or a.verify
     if not do:
@@ -374,11 +447,13 @@ def main() -> int:
     before = len(pages)
     if a.all or a.fix_page8:
         pages, removed = fix_page8(pages, a.keep_page8)
-        pages = rebuild_index(renumber(pages))
-        text = fix_counts(SEP.join(pages), len(pages))
+        text = SEP.join(pages)
         print(f"pages {before} -> {len(pages)} (removed {removed})", file=sys.stderr)
     if a.all or a.toc:
         text = build_toc(text)
+    if a.all or a.fix_page8 or a.toc:
+        pages = rebuild_index(renumber(text.split(SEP)))
+        text = fix_counts(SEP.join(pages), len(pages))
     if a.all or a.assets:
         if not a.dry_run:
             do_assets(root, allow)
@@ -393,11 +468,8 @@ def main() -> int:
     if a.dry_run:
         print("dry run: only VERIFY.md written", file=sys.stderr)
         return 0
-    bak = a.src.with_suffix(".bak")
-    if not bak.exists():
-        shutil.copy2(a.src, bak)
-    (a.out or a.src).write_text(text)
-    print(f"wrote {a.out or a.src}", file=sys.stderr)
+    save(a.out or a.src, text)
+    print(f"wrote {a.out or a.src} ({len(text)} chars)", file=sys.stderr)
     return 0
 
 

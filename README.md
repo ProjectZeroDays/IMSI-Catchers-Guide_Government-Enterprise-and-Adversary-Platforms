@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-complete%20reference-blue?style=flat-square)
+﻿![Status](https://img.shields.io/badge/status-complete%20reference-blue?style=flat-square)
 ![Version](https://img.shields.io/badge/version-2.0-informational?style=flat-square)
 ![Scope](https://img.shields.io/badge/scope-GSM%20%C2%B7%20UMTS%20%C2%B7%20LTE%20%C2%B7%20NR%20%C2%B7%20NTN-critical?style=flat-square)
 ![Parts](https://img.shields.io/badge/parts-11-lightgrey?style=flat-square)
@@ -15,6 +15,12 @@
 ![Project banner](./assets/banner.png)
 
 # IMSI Catchers: Government, Enterprise, and Adversary-Platforms
+
+<!-- patch:status -->
+> **Release status.** 34 pages · 3 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
+> `--check` is green only at zero outstanding and zero hotlinks.
+<!-- /patch:status -->
+
 
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
 
@@ -42,22 +48,16 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 
 ---
 
-*Version 2.0 · Page 1 of 28. Next page: table of contents, Parts I–V.*
+*Version 2.4 · Page 1 of 34. Next page: Table of Contents.*
 
 ---
 ---
 
 ## Table of Contents
-
-**Front matter**
-
-- [About this edition](#about-this-edition)
-- [Document Map](#document-map)
-- [How to read the grading and confidence marks](#how-to-read-the-grading-and-confidence-marks)
-
-**Part I — Reference and Field Guide**
-
-- [Part I index](#part-i--reference-and-field-guide)
+<style>
+details.toc>summary{cursor:pointer;font-weight:600;padding:.2rem 0}details.toc details>summary{font-weight:400;padding-left:1rem}details.toc[open]>summary{margin-bottom:.35rem}</style>
+<details class="toc">
+<summary>Part I — Reference and Field Guide</summary>
 1. [Executive Summary](#1-executive-summary)
 2. [How IMSI Catchers Operate](#2-how-imsi-catchers-operate)
 3. [Exhaustive Feature and Capability Catalogue](#3-exhaustive-feature-and-capability-catalogue)
@@ -74,9 +74,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 14. [Glossary and Appendix](#14-glossary-and-appendix)
 15. [References and Citations](#15-references-and-citations)
 
-**Part II — Hardware, Software and Build Guides**
-
-- [Part II index](#part-ii--hardware-software-and-build-guides)
+</details>
+<details class="toc">
+<summary>Part II — Hardware, Software and Build Guides</summary>
 16. [How to Use This Volume](#16-how-to-use-this-volume)
 17. [Shared Hardware Substrate](#17-shared-hardware-substrate)
 18. [Hardware by Category](#18-hardware-by-category)
@@ -89,9 +89,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 25. [Failure Modes and Calibration](#25-failure-modes-and-calibration)
 26. [References](#26-references)
 
-**Part III — Site Survey, Core Handoff, Evidence Chain and Signalling Control**
-
-- [Part III index](#part-iii--site-survey-core-handoff-evidence-chain-and-signalling-control)
+</details>
+<details class="toc">
+<summary>Part III — Site Survey, Core Handoff, Evidence Chain and Signalling Control</summary>
 27. [Scope and the Gap Being Addressed](#27-scope-and-the-gap-being-addressed)
 28. [Site Survey, Comprehensively](#28-site-survey-comprehensively)
 29. [Handing a Session to a Real Core](#29-handing-a-session-to-a-real-core)
@@ -101,9 +101,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 33. [Internal Build Order](#33-internal-build-order)
 34. [References](#34-references)
 
-**Part IV — Build Specification, With Numbers**
-
-- [Part IV index](#part-iv--build-specification-with-numbers)
+</details>
+<details class="toc">
+<summary>Part IV — Build Specification, With Numbers</summary>
 35. [RF Exposure and Exclusion Zones](#35-rf-exposure-and-exclusion-zones)
 36. [TX/RX Isolation and Desense](#36-txrx-isolation-and-desense)
 37. [Power Architecture](#37-power-architecture)
@@ -120,9 +120,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 48. [Licensing Checklist](#48-licensing-checklist)
 49. [The One-Day Bootstrap Build](#49-the-one-day-bootstrap-build)
 
-**Part V — 4G/5G Observation Platform: Full Build Guide**
-
-- [Part V index](#part-v--4g5g-observation-platform-full-build-guide)
+</details>
+<details class="toc">
+<summary>Part V — 4G/5G Observation Platform: Full Build Guide</summary>
 50. [Design Goals and Non-Goals](#50-design-goals-and-non-goals)
 51. [Architecture](#51-architecture)
 52. [Hardware Selection](#52-hardware-selection)
@@ -141,21 +141,13 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 65. [Cost Summary](#65-cost-summary)
 66. [Honest Limits](#66-honest-limits)
 
----
+</details>
+<details class="toc">
+<summary>Part VI — Visual Reference</summary>
 
-*Version 2.0 · Page 2 of 28. Next page: table of contents, Parts VI–XI.*
-
----
----
-
-**Part VI — Visual Reference**
-
-- [Part VI index](#part-vi--visual-reference)
-- [Plates 1–18](#vi-plates--project-art-and-hardware)
-
-**Part VII — Category Deep Dives**
-
-- [Part VII index](#part-vii--category-deep-dives)
+</details>
+<details class="toc">
+<summary>Part VII — Category Deep Dives</summary>
 83. [The Three Categories Compared](#83-the-three-categories-compared)
 84. [Government and Nation-State Operations](#84-government-and-nation-state-operations)
 85. [Government Procurement and Programme Shape](#85-government-procurement-and-programme-shape)
@@ -167,9 +159,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 91. [Commercial Market Map and Pricing](#91-commercial-market-map-and-pricing)
 92. [Public Programmes and Known Deployments](#92-public-programmes-and-known-deployments)
 
-**Part VIII — Technical Supplements**
-
-- [Part VIII index](#part-viii--technical-supplements)
+</details>
+<details class="toc">
+<summary>Part VIII — Technical Supplements</summary>
 93. [3G and UMTS Specifics](#93-3g-and-umts-specifics)
 94. [Wi-Fi Calling, ePDG and IMS](#94-wi-fi-calling-epdg-and-ims)
 95. [SS7, Diameter and Core-Side Attacks](#95-ss7-diameter-and-core-side-attacks)
@@ -184,9 +176,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 104. [6G and the Trajectory](#104-6g-and-the-trajectory)
 105. [What Still Cannot Be Done](#105-what-still-cannot-be-done)
 
-**Part IX — Programme and Operations**
-
-- [Part IX index](#part-ix--programme-and-operations)
+</details>
+<details class="toc">
+<summary>Part IX — Programme and Operations</summary>
 106. [RF Safety Incidents and Emergency Procedures](#106-rf-safety-incidents-and-emergency-procedures)
 107. [Environmental Ratings and Installation](#107-environmental-ratings-and-installation)
 108. [Supply Chain and Component Provenance](#108-supply-chain-and-component-provenance)
@@ -201,9 +193,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 117. [Insurance, Liability and Complaints](#117-insurance-liability-and-complaints)
 118. [Postmortems and Lessons Learned](#118-postmortems-and-lessons-learned)
 
-**Part X — Reference Annexes**
-
-- [Part X index](#part-x--reference-annexes)
+</details>
+<details class="toc">
+<summary>Part X — Reference Annexes</summary>
 119. [Band and Frequency Reference](#119-band-and-frequency-reference)
 120. [ARFCN and EARFCN Calculators](#120-arfcn-and-earfcn-calculators)
 121. [PLMN and MCC/MNC Reference](#121-plmn-and-mccmnc-reference)
@@ -215,9 +207,9 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 127. [Expanded Glossary](#127-expanded-glossary)
 128. [FAQ and Troubleshooting Index](#128-faq-and-troubleshooting-index)
 
-**Part XI — Forms and Templates**
-
-- [Part XI index](#part-xi--forms-and-templates)
+</details>
+<details class="toc">
+<summary>Part XI — Forms and Templates</summary>
 129. [Site Survey Form](#129-site-survey-form)
 130. [Key-Up Authorisation Form](#130-key-up-authorisation-form)
 131. [Acceptance Certificate](#131-acceptance-certificate)
@@ -229,11 +221,11 @@ Nothing here is a product. It is a reference, and a build manual for the parts o
 137. [Cross-Examination Question Bank](#137-cross-examination-question-bank)
 138. [Licence, Reuse and Credits](#138-licence-reuse-and-credits)
 
-**Back matter**
+</details>
 
-- [Consolidated references index](#consolidated-references-index)
-- [Change history](#change-history)
+*Version 2.4 · Page 2 of 34. Next page: Document Map.*
 
+---
 ---
 
 ## Document Map
@@ -292,6 +284,9 @@ Part version 1.1 · Compiled 2026-11-13 · Scope: GSM through 5G SA
 
 **Part I index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 1. [Executive Summary](#1-executive-summary)
 2. [How IMSI Catchers Operate](#2-how-imsi-catchers-operate)
 3. [Exhaustive Feature and Capability Catalogue](#3-exhaustive-feature-and-capability-catalogue)
@@ -307,6 +302,8 @@ Part version 1.1 · Compiled 2026-11-13 · Scope: GSM through 5G SA
 13. [Privacy Travel Checklist](#13-privacy-travel-checklist)
 14. [Glossary and Appendix](#14-glossary-and-appendix)
 15. [References and Citations](#15-references-and-citations)
+
+</details>
 
 ---
 
@@ -437,12 +434,20 @@ On LTE and 5G, a catcher generally gets metadata and identity, not plaintext, be
 
 ---
 
-*Version 2.0 · Page 4 of 28. Next page: Part I §3–§4.*
+*Version 2.4 · Page 4 of 34. Next page: 3. Exhaustive Feature and Capability Catalogue.*
 
 ---
 ---
 
 ## 3. Exhaustive Feature and Capability Catalogue
+
+<!-- patch:img:## 3. Exhaustive Feature and Capability Catalogue -->
+<p class="plates">
+<figure><img src="./assets/plates/tower.jpg" alt="Lattice tower" width="220" loading="lazy"><figcaption>Lattice tower — stock (stock)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 Organised by tier of actor. Real deployments mix tiers; a nation-state suite may include commodity components.
 
@@ -558,6 +563,14 @@ Full commercial map, price bands and procurement behaviour in §91.
 ---
 
 ## 4. Vulnerable and Affected Devices
+
+<!-- patch:img:## 4. Vulnerable and Affected Devices -->
+<p class="plates">
+<figure><img src="./assets/plates/toggle2g.png" alt="Android 2G toggle" width="220" loading="lazy"><figcaption>Android 2G toggle — AOSP (project)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 The honest answer is: every device with a cellular radio. What varies is exposure.
 
@@ -815,6 +828,15 @@ The generational story is real: identity concealment, mutual authentication, int
 
 ## 9. Android Hardening Guide
 
+<!-- patch:img:## 9. Android Hardening Guide -->
+<p class="plates">
+<figure><img src="./assets/plates/toggle2g.png" alt="Android 2G toggle" width="220" loading="lazy"><figcaption>Android 2G toggle — AOSP (project)</figcaption></figure>
+<figure><img src="./assets/plates/snoop.jpg" alt="SnoopSnitch" width="220" loading="lazy"><figcaption>SnoopSnitch — Google Play (vendor)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 Ordered by effect, highest first. The first two items do most of the work.
 
 ### 9.1 Android 16+: Advanced Protection and the 2G toggle
@@ -887,6 +909,14 @@ Treat output as corroboration. The reliable pattern is: tool flags → you walk 
 
 ## 10. iPhone Hardening Guide
 
+<!-- patch:img:## 10. iPhone Hardening Guide -->
+<p class="plates">
+<figure><img src="./assets/plates/signal.jpg" alt="Signal" width="220" loading="lazy"><figcaption>Signal — Google Play (vendor)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 iOS has fewer controls and a stronger single one. Lockdown Mode is the whole of it.
 
 ### 10.1 Lockdown Mode
@@ -955,173 +985,6 @@ Score 0–3, multiply by weight, sum. Per trip or per site.
 **Overrides.** Any 3 on items 1, 3, 7 or 10 raises the band one level. Item 8 at 3 with item 3 at 2 or more sets T3 outright.
 
 **Notes.** Score before booking, re-score on itinerary change, record on the authorisation. A low score with a confirmed incident still escalates.
-
----
----
-
-> **Note.** §9–§11 as delivered on page 8 were a condensed working draft. The authoritative text follows and supersedes them. Page count for this edition is 29.
-
-## 9. Android Hardening Guide
-
-### 9.1 Version floors
-
-| Feature | Minimum | Reality |
-|---|---|---|
-| Modem-level 2G disable | Android 12 | OEM implementation varies; many devices lack it |
-| Null-cipher connection blocking | Android 14 | Also OEM-dependent |
-| Identifier-request notification | Android 15/16 | Requires IRadio HAL 3.0 |
-| Mobile network security page | Android 16 | Requires HAL 3.0, GRF blocks retrofits |
-
-The Android 16 notifications are gated on IRadio 3.0 and a specific API set: `setSecurityAlgorithmsUpdatedEnabled`, `securityAlgorithmsUpdated`, `setCellularIdentifierTransparencyEnabled` and `cellularIdentifierDisclosed`. Pixel 10 and later ship with the hardware that exposes them; most current devices will never get them because of Requirements Freeze.
-
-### 9.2 Baseline steps
-
-```text
-1. Settings > Security & privacy > Advanced Protection > ON
-2. Settings > Network & internet > SIMs > [carrier] > 2G network protection > ON
-3. Settings > Security & privacy > Mobile network security > Network notifications > ON (if present)
-4. Settings > Network & internet > Wi-Fi > Wi-Fi preferences
-     - Turn on Wi-Fi automatically: OFF
-     - Notify for public networks: ON
-5. Settings > Network & internet > Private DNS > [your resolver].dns.example
-6. Settings > Security > Screen lock > 6+ digit PIN
-7. Settings > Security > Advanced > USB accessory restriction: ON
-8. Developer options > Mobile data always active: OFF
-```
-
-### 9.3 Manual carrier selection
-
-Automatic selection follows the loudest, not the most trustworthy.
-
-```text
-Settings > Network & internet > SIMs > [carrier] > Carrier > turn off "Automatically select network"
-> pick the correct carrier from the list
-```
-
-Re-do it after every flight, border crossing and reboot in a new country. Re-enable automatic when you are home and coverage matters.
-
-### 9.4 Diagnostics
-
-| Tool | Needs | Gives |
-|---|---|---|
-| `*#*#4636#*#*` | Nothing | Preferred network type, per-SIM radio state |
-| Settings > About > SIM status | Nothing | RAT, signal, network type |
-| CellMapper | Nothing | Tower map, cell ID corroboration |
-| SnoopSnitch | Root + Qualcomm | Identity-request and downgrade detection, patch audit |
-| AIMSICD | Root | Legacy; dormant, still informative |
-| EAGLE Security | App install | Heuristic detection, no root |
-
-### 9.5 Managed fleets
-
-Expose the 2G toggle and Advanced Protection as managed configurations. Enforce via compliance policy with an exception list for rural staff. Track baseband patch level separately from OS patch level, because they diverge and the OS number is the misleading one. Push a per-country carrier allow-list for tier-1 travellers.
-
-### 9.6 What not to bother with
-
-IMEI changing, "cell tower detector" Play Store apps with no baseband access, and root-based hardening on devices where the root itself is a bigger risk than the threat.
-
----
-
-## 10. iPhone Hardening Guide
-
-iOS exposes less radio control than Android, so the leverage is concentrated in Lockdown Mode.
-
-### 10.1 Lockdown Mode
-
-Apple documents that Lockdown Mode **turns off 2G and 3G cellular support** and stops automatic joining of non-secure Wi-Fi. That single switch does more than every other iOS setting combined.
-
-```text
-Settings > Privacy & Security > Lockdown Mode > Turn On
-```
-
-Trade-offs are real: no 2G/3G means no coverage where only those exist, no auto-join to captive portals, and some app features degrade. Apple positions it for people likely to be individually targeted. Enable it for T1 and above.
-
-### 10.2 Baseline steps
-
-```text
-1. Settings > Privacy & Security > Lockdown Mode > ON (tier 1+)
-2. Settings > Cellular > Cellular Data Options > Voice & Data > LTE or 5G On (avoids 3G CS fallback)
-3. Settings > Cellular > [line] > Network Selection > turn off Automatic > pick carrier
-4. Settings > Wi-Fi > Ask to Join Networks > OFF
-5. Settings > Wi-Fi > Auto-Join Hotspot > Ask to Join
-6. Settings > Privacy & Security > Analytics & Improvements > Share iPhone Analytics > OFF
-7. Settings > Privacy & Security > Advanced > Advanced Data Protection > ON
-8. Settings > Face ID & Passcode > USB Accessories > OFF
-9. Settings > Safari > Limit IP Address Tracking > ON (Private Relay where available)
-```
-
-### 10.3 Field Test mode
-
-`*3001#12345#*` opens Field Test. Useful fields:
-
-- Serving Cell Info — RAT, band, PCI, TAC
-- Neighbour cells — whether a suspicious cell persists
-- RRC state — connection churn
-
-Values are unstable and carrier-dependent. Photograph rather than transcribe.
-
-### 10.4 Operational notes
-
-- Lockdown Mode can break Wi-Fi Calling; verify before relying on it abroad.
-- Manual network selection resets on some carrier updates. Re-check after every reboot in a new country.
-- Advanced Data Protection does nothing for the radio but protects what a device compromise would expose.
-- iOS reports "No Service" rather than "suspicious network" — absence of signal with neighbours on full bars is the tell.
-
-### 10.5 MDM
-
-Push Lockdown Mode via declarative device management for tier-1 and above, with a documented break-glass to disable for coverage emergencies. Enforce minimum iOS version, USB accessory restriction, and Advanced Data Protection. Log carrier-selection changes where the MDM can see them.
-
----
-
-## 11. Risk-Scoring Worksheet Template
-
-Score each factor 0–5, multiply by weight, sum. Use per trip, per site or per investigation.
-
-**Factor weights**
-
-| # | Factor | Weight | 0 | 3 | 5 |
-|---|---|---|---|---|---|
-| F1 | Actor capability in region | 5 | No known use | Periodic LE deployment | Persistent state programme |
-| F2 | Your salience | 5 | Anonymous | Named professional | Named target |
-| F3 | Dwell time | 4 | <2 h | 1–3 days | Weeks |
-| F4 | Location predictability | 4 | Ad hoc | Daily pattern | Fixed schedule |
-| F5 | Device exposure | 4 | 5G SA, hardened | 4G, 2G off | 2G fallback, old OS |
-| F6 | Content sensitivity | 3 | Public | Commercial | Source-identifying |
-| F7 | Legal recourse | 3 | Strong disclosure law | Partial | None |
-| F8 | Corroborating collection available | 2 | None | CellMapper | Own passive sensor |
-
-**Scoring sheet**
-
-| Factor | Weight | Score | Weighted |
-|---|---|---|---|
-| F1 | 5 | | |
-| F2 | 5 | | |
-| F3 | 4 | | |
-| F4 | 4 | | |
-| F5 | 4 | | |
-| F6 | 3 | | |
-| F7 | 3 | | |
-| F8 | 2 | | |
-| **Total** | **30** | | **/150** |
-
-**Bands**
-
-| Score | Band | Action |
-|---|---|---|
-| 0–34 | Low | Baseline only |
-| 35–64 | Moderate | 2G off, current OS |
-| 65–94 | High | T1 config, Lockdown/Advanced Protection, manual carrier |
-| 95–124 | Severe | T2, burner handset, comms plan |
-| 125–150 | Critical | T3, minimal device, silence schedule |
-
-**Worked example**
-
-Journalist, named, five days, fixed hotel, Android 13 with 2G enabled, source-identifying notes, no disclosure law, no sensor.
-
-F1 4×5=20 · F2 5×5=25 · F3 4×4=16 · F4 5×4=20 · F5 5×4=20 · F6 5×3=15 · F7 5×3=15 · F8 0×2=0 · **Total 131 → Critical.**
-
-### 11.1 Notes on scoring honestly
-
-Score the actor, not the country's reputation. A friendly state with a large border queue is a higher F2 than a hostile state you fly over. Score F5 on the device you will actually carry, not the one you own. Re-score when the itinerary changes; a static score from booking time is theatre.
 
 ---
 ---
@@ -1364,6 +1227,9 @@ Part version 1.0 · Compiled 2026-11-13
 
 **Part II index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 16. [How to Use This Volume](#16-how-to-use-this-volume)
 17. [Shared Hardware Substrate](#17-shared-hardware-substrate)
 18. [Hardware by Category](#18-hardware-by-category)
@@ -1375,6 +1241,8 @@ Part version 1.0 · Compiled 2026-11-13
 24. [Capability and Budget Ladder](#24-capability-and-budget-ladder)
 25. [Failure Modes and Calibration](#25-failure-modes-and-calibration)
 26. [References](#26-references)
+
+</details>
 
 > **Link caveat.** Vendor storefronts move, merge and go end-of-life. Where a product has moved to a parent company that is noted inline. Prices are indicative bands, not quotes. Every commercial catcher is quote-only.
 
@@ -1397,6 +1265,15 @@ Sections 17 to 20 are reference material. Sections 21 to 23 are build guides. Re
 ---
 
 ## 17. Shared Hardware Substrate
+
+<!-- patch:img:## 17. Shared Hardware Substrate -->
+<p class="plates">
+<figure><img src="./assets/plates/gnssdo.jpg" alt="GNSSDO" width="220" loading="lazy"><figcaption>GNSSDO — Leo Bodnar via Batronix (retail)</figcaption></figure>
+<figure><img src="./assets/plates/lmr400.jpg" alt="LMR-400 jumper" width="220" loading="lazy"><figcaption>LMR-400 jumper — generated (Pasternack for reference) (CC BY-SA 4.0)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 Every category draws from these pools. Specific part numbers differ; the function does not.
 
@@ -1466,6 +1343,24 @@ Every build guide below is a variation on this diagram. The differences are powe
 ---
 
 ## 18. Hardware by Category
+
+<!-- patch:img:## 18. Hardware by Category -->
+<p class="plates">
+<figure><img src="./assets/plates/limesdr.jpg" alt="LimeSDR Mini 2.0" width="220" loading="lazy"><figcaption>LimeSDR Mini 2.0 — eBay listing (seller)</figcaption></figure>
+<figure><img src="./assets/plates/b210.jpg" alt="USRP B210" width="220" loading="lazy"><figcaption>USRP B210 — Ettus Research (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/bladerf.png" alt="bladeRF 2.0 micro" width="220" loading="lazy"><figcaption>bladeRF 2.0 micro — Nuand (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/hackrf.jpeg" alt="HackRF One" width="220" loading="lazy"><figcaption>HackRF One — HackRF docs (project)</figcaption></figure>
+<figure><img src="./assets/plates/rtlsdr.jpg" alt="RTL-SDR dongle" width="220" loading="lazy"><figcaption>RTL-SDR dongle — retail listing (seller)</figcaption></figure>
+<figure><img src="./assets/plates/kraken.jpg" alt="KrakenSDR" width="220" loading="lazy"><figcaption>KrakenSDR — KrakenRF (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/antsdr.jpg" alt="AntSDR E200" width="220" loading="lazy"><figcaption>AntSDR E200 — CNX Software (press)</figcaption></figure>
+<figure><img src="./assets/plates/pluto.jpg" alt="ADALM-PLUTO" width="220" loading="lazy"><figcaption>ADALM-PLUTO — Analog Devices (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/tsma6.jpg" alt="R&S TSMx scanner" width="220" loading="lazy"><figcaption>R&S TSMx scanner — Rohde & Schwarz (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/thinkrf.png" alt="ThinkRF R5500" width="220" loading="lazy"><figcaption>ThinkRF R5500 — ThinkRF (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/sm200b.jpg" alt="Signal Hound SM200B" width="220" loading="lazy"><figcaption>Signal Hound SM200B — Signal Hound (vendor)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 18.1 Category B — bad actor and DIY
 
@@ -1542,6 +1437,24 @@ Purpose-built appliances. Public detail is thin; capability claims outrun docume
 ---
 
 ## 19. Software by Category
+
+<!-- patch:img:## 19. Software by Category -->
+<p class="plates">
+<figure><img src="./assets/plates/osmocom.jpg" alt="Osmocom" width="220" loading="lazy"><figcaption>Osmocom — project avatar (project)</figcaption></figure>
+<figure><img src="./assets/plates/srsran.png" alt="srsRAN" width="220" loading="lazy"><figcaption>srsRAN — project docs (project)</figcaption></figure>
+<figure><img src="./assets/plates/open5gs.png" alt="Open5GS" width="220" loading="lazy"><figcaption>Open5GS — project site (project)</figcaption></figure>
+<figure><img src="./assets/plates/free5gc.png" alt="free5GC" width="220" loading="lazy"><figcaption>free5GC — project site (project)</figcaption></figure>
+<figure><img src="./assets/plates/magma.jpg" alt="Magma" width="220" loading="lazy"><figcaption>Magma — project repo (project)</figcaption></figure>
+<figure><img src="./assets/plates/kamailio.png" alt="Kamailio" width="220" loading="lazy"><figcaption>Kamailio — Wikimedia (Commons)</figcaption></figure>
+<figure><img src="./assets/plates/asterisk.png" alt="Asterisk" width="220" loading="lazy"><figcaption>Asterisk — Wikimedia (Commons)</figcaption></figure>
+<figure><img src="./assets/plates/wireshark.png" alt="Wireshark" width="220" loading="lazy"><figcaption>Wireshark — Wikimedia (Commons)</figcaption></figure>
+<figure><img src="./assets/plates/gnuradio.jpg" alt="GNU Radio Companion" width="220" loading="lazy"><figcaption>GNU Radio Companion — GNU Radio Foundation logo, CC BY-ND 2.0 (project)</figcaption></figure>
+<figure><img src="./assets/plates/grafana.png" alt="Grafana" width="220" loading="lazy"><figcaption>Grafana — theme-park docs (project)</figcaption></figure>
+<figure><img src="./assets/plates/qgis.webp" alt="QGIS" width="220" loading="lazy"><figcaption>QGIS — QGIS project (project)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 19.1 Shared components
 
@@ -1636,6 +1549,15 @@ Rated by whether it builds and runs today. "Works" means a competent operator ca
 ---
 
 ## 21. Build Guide B — Bad Actor and DIY
+
+<!-- patch:img:## 21. Build Guide B — Bad Actor and DIY -->
+<p class="plates">
+<figure><img src="./assets/plates/limesdr.jpg" alt="LimeSDR Mini 2.0" width="220" loading="lazy"><figcaption>LimeSDR Mini 2.0 — eBay listing (seller)</figcaption></figure>
+<figure><img src="./assets/plates/rtlsdr.jpg" alt="RTL-SDR dongle" width="220" loading="lazy"><figcaption>RTL-SDR dongle — retail listing (seller)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 **Goal:** make nearby handsets attach to your cell and reveal IMSI/IMEI.
 
@@ -1760,6 +1682,15 @@ Point `enb.conf` at your Open5GS PLMN, set `mme_list` to the local address, star
 
 ## 22. Build Guide E — Enterprise Passive Monitoring
 
+<!-- patch:img:## 22. Build Guide E — Enterprise Passive Monitoring -->
+<p class="plates">
+<figure><img src="./assets/plates/tsma6.jpg" alt="R&S TSMx scanner" width="220" loading="lazy"><figcaption>R&S TSMx scanner — Rohde & Schwarz (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/thinkrf.png" alt="ThinkRF R5500" width="220" loading="lazy"><figcaption>ThinkRF R5500 — ThinkRF (vendor)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 **Goal:** continuous, calibrated observation without transmitting. No licence needed.
 
 **Hardware:** ThinkRF R5500/R5750 or R&S TSMA6, PoE switch, GNSS time server, mast or vehicle mount, LNA, rack.
@@ -1822,6 +1753,15 @@ A passive sensor cannot tell you a tower is fake. It tells you a tower is *new* 
 ---
 
 ## 23. Build Guide G — Government and Nation State
+
+<!-- patch:img:## 23. Build Guide G — Government and Nation State -->
+<p class="plates">
+<figure><img src="./assets/plates/mast.webp" alt="Rooftop mast" width="220" loading="lazy"><figcaption>Rooftop mast — supplier listing (seller)</figcaption></figure>
+<figure><img src="./assets/plates/tower.jpg" alt="Lattice tower" width="220" loading="lazy"><figcaption>Lattice tower — stock (stock)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 **Goal:** active collection with targeting, mobility and core integration.
 
@@ -1999,6 +1939,9 @@ Part version 1.0 · Compiled 2026-11-13
 
 **Part III index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 27. [Scope and the Gap Being Addressed](#27-scope-and-the-gap-being-addressed)
 28. [Site Survey, Comprehensively](#28-site-survey-comprehensively)
 29. [Handing a Session to a Real Core](#29-handing-a-session-to-a-real-core)
@@ -2007,6 +1950,8 @@ Part version 1.0 · Compiled 2026-11-13
 32. [Gap Analysis: Commercial, FOSS, Internal](#32-gap-analysis-commercial-foss-internal)
 33. [Internal Build Order](#33-internal-build-order)
 34. [References](#34-references)
+
+</details>
 
 > **Link caveat.** Web search was unavailable during compilation of this part. All links are from standing knowledge and are marked where drift is likely. Verify before relying on any of them in a procurement document.
 
@@ -2036,6 +1981,15 @@ The honest summary: the RF and core layers are solved in free software. The proc
 ---
 
 ## 28. Site Survey, Comprehensively
+
+<!-- patch:img:## 28. Site Survey, Comprehensively -->
+<p class="plates">
+<figure><img src="./assets/plates/qgis.webp" alt="QGIS" width="220" loading="lazy"><figcaption>QGIS — QGIS project (project)</figcaption></figure>
+<figure><img src="./assets/plates/mast.webp" alt="Rooftop mast" width="220" loading="lazy"><figcaption>Rooftop mast — supplier listing (seller)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 A site survey is the difference between a deployment that collects and one that jams itself, alerts every handset in range, and produces artefacts nobody can defend. Budget a week per site. Do not skip because you are impatient.
 
@@ -2180,6 +2134,15 @@ Repeat the Phase 5 checks after 1 hour, 24 hours and 7 days. Log the delta. A de
 ---
 
 ## 29. Handing a Session to a Real Core
+
+<!-- patch:img:## 29. Handing a Session to a Real Core -->
+<p class="plates">
+<figure><img src="./assets/plates/open5gs.png" alt="Open5GS" width="220" loading="lazy"><figcaption>Open5GS — project site (project)</figcaption></figure>
+<figure><img src="./assets/plates/kamailio.png" alt="Kamailio" width="220" loading="lazy"><figcaption>Kamailio — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 29.1 What the phrase actually means
 
@@ -2335,6 +2298,14 @@ Expect three to six months of engineering for a stable relay.
 ---
 
 ## 30. CDR Generation and the Evidence Chain
+
+<!-- patch:img:## 30. CDR Generation and the Evidence Chain -->
+<p class="plates">
+<figure><img src="./assets/plates/openssl.png" alt="OpenSSL" width="220" loading="lazy"><figcaption>OpenSSL — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 30.1 Why this is the part that fails
 
@@ -2707,6 +2678,9 @@ Part version 1.0 · Compiled 2026-11-13
 
 **Part IV index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 35. [RF Exposure and Exclusion Zones](#35-rf-exposure-and-exclusion-zones)
 36. [TX/RX Isolation and Desense](#36-txrx-isolation-and-desense)
 37. [Power Architecture](#37-power-architecture)
@@ -2722,6 +2696,8 @@ Part version 1.0 · Compiled 2026-11-13
 47. [Documentation Deliverables](#47-documentation-deliverables)
 48. [Licensing Checklist](#48-licensing-checklist)
 49. [The One-Day Bootstrap Build](#49-the-one-day-bootstrap-build)
+
+</details>
 
 > **How to read this.** Each section has a **Spec** (do this properly), a **Verify** (how you prove it), a **Bootstrap** (the cheap version that gets you running today), and a **Breaks when** (the failure you have accepted). Bootstraps are labelled as cutting corners. They are legitimate for a lab, a demo or a first site. They are not legitimate for an evidential deployment.
 
@@ -2883,6 +2859,14 @@ Output power folds back, the SDR drops USB, or the box cooks in summer. Symptom 
 ---
 
 ## 39. GNSS and Timing Integrity
+
+<!-- patch:img:## 39. GNSS and Timing Integrity -->
+<p class="plates">
+<figure><img src="./assets/plates/gnssdo.jpg" alt="GNSSDO" width="220" loading="lazy"><figcaption>GNSSDO — Leo Bodnar via Batronix (retail)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### Spec
 
@@ -3254,6 +3238,9 @@ Part version 1.0 · Compiled 2026-11-13 · Target: lab through field prototype, 
 
 **Part V index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 50. [Design Goals and Non-Goals](#50-design-goals-and-non-goals)
 51. [Architecture](#51-architecture)
 52. [Hardware Selection](#52-hardware-selection)
@@ -3271,6 +3258,8 @@ Part version 1.0 · Compiled 2026-11-13 · Target: lab through field prototype, 
 64. [Test and Validation](#64-test-and-validation)
 65. [Cost Summary](#65-cost-summary)
 66. [Honest Limits](#66-honest-limits)
+
+</details>
 
 > **What "non-compliant" means here.** Not certified, not type-approved, not guaranteed inside spurious-emission limits, and probably operating under experimental or tolerance provisions rather than a proper assignment. That buys enormous freedom in hardware choice and enormous responsibility in testing. It also means you should read Part IV before you key a transmitter in public.
 >
@@ -3354,6 +3343,16 @@ flowchart TB
 
 ## 52. Hardware Selection
 
+<!-- patch:img:## 52. Hardware Selection -->
+<p class="plates">
+<figure><img src="./assets/plates/n310.jpeg" alt="USRP N310" width="220" loading="lazy"><figcaption>USRP N310 — Ettus Research (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/b210.jpg" alt="USRP B210" width="220" loading="lazy"><figcaption>USRP B210 — Ettus Research (vendor)</figcaption></figure>
+<figure><img src="./assets/plates/antsdr.jpg" alt="AntSDR E200" width="220" loading="lazy"><figcaption>AntSDR E200 — CNX Software (press)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 ### 52.1 Primary SDR
 
 | Option | Band | Duplex | Max rate | 5G 100 MHz? | Price | Verdict |
@@ -3402,6 +3401,15 @@ HackRF (half duplex, 20 MS/s). Any USB 2.0 SDR. Raspberry Pi 4 as host for anyth
 ---
 
 ## 53. Software Base Selection
+
+<!-- patch:img:## 53. Software Base Selection -->
+<p class="plates">
+<figure><img src="./assets/plates/srsran.png" alt="srsRAN" width="220" loading="lazy"><figcaption>srsRAN — project docs (project)</figcaption></figure>
+<figure><img src="./assets/plates/open5gs.png" alt="Open5GS" width="220" loading="lazy"><figcaption>Open5GS — project site (project)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 53.1 Chosen stack
 
@@ -3635,6 +3643,14 @@ flowchart LR
 
 ## 57. Decoding Pipeline
 
+<!-- patch:img:## 57. Decoding Pipeline -->
+<p class="plates">
+<figure><img src="./assets/plates/wireshark.png" alt="Wireshark" width="220" loading="lazy"><figcaption>Wireshark — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 ### 57.1 Capture
 
 ```bash
@@ -3815,6 +3831,15 @@ Dark by default. Monospace for identifiers. Sticky headers. Keyboard: `/` search
 ---
 
 ## 60. Telemetry and Charts
+
+<!-- patch:img:## 60. Telemetry and Charts -->
+<p class="plates">
+<figure><img src="./assets/plates/grafana.png" alt="Grafana" width="220" loading="lazy"><figcaption>Grafana — theme-park docs (project)</figcaption></figure>
+<figure><img src="./assets/plates/prometheus.png" alt="Prometheus" width="220" loading="lazy"><figcaption>Prometheus — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 ### 60.1 Metrics
 
@@ -4103,7 +4128,7 @@ Generated for this document, 2026-11-14. Not a photograph; a cover mark. Replace
 
 ![Exploded SDR front end diagram](./assets/front-end-exploded.png)
 
-Generated for this document, 2026-11-14. Assembly order for the chain described in §17.3 and §36: antenna port, bandpass can, amplifier, SDR, host link. Vertical separation between the TX and RX branches is what buys the isolation.
+Generated for this document, 2026-11-14. Assembly order for the chain described in §17.3 and §36: antenna port, bandpass can, amplifier, SDR, host link. It shows sequence, not duplex topology - the receive branch and the vertical separation that buys the isolation are specified in section 36, not shown here.
 
 ### Plate 3 — LimeSDR Mini 2.0
 
@@ -4227,6 +4252,9 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part VII index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 83. [The Three Categories Compared](#83-the-three-categories-compared)
 84. [Government and Nation-State Operations](#84-government-and-nation-state-operations)
 85. [Government Procurement and Programme Shape](#85-government-procurement-and-programme-shape)
@@ -4237,6 +4265,8 @@ Part added in 2.0 · Compiled 2026-11-14
 90. [Adversary Counter-Forensics](#90-adversary-counter-forensics)
 91. [Commercial Market Map and Pricing](#91-commercial-market-map-and-pricing)
 92. [Public Programmes and Known Deployments](#92-public-programmes-and-known-deployments)
+
+</details>
 
 ---
 
@@ -4733,6 +4763,39 @@ Almost nothing, if the detection is not acted on. A defender who logs an anomaly
 
 ## 91. Commercial Market Map and Pricing
 
+<!-- patch:91 -->
+<details>
+<summary><strong>Verification — §91 price bands (all rows D-grade)</strong></summary>
+
+Replace each band with a live quote. §143 is the procedure; §D.5 is how a grade rises.
+
+STATUS: UNVERIFIED
+
+| Platform | Band as written | Quoted | Quote ref | Date | By |
+|---|---|---|---|---|---|
+| L3Harris Stingray II | see §91 | ☐ | | | |
+| L3Harris KingFish | see §91 | ☐ | | | |
+| L3Harris Hailstorm | see §91 | ☐ | | | |
+| L3Harris Crossbow | see §91 | ☐ | | | |
+| Septier IBS | see §91 | ☐ | | | |
+| Septier Interceptor | see §91 | ☐ | | | |
+| Septier LightRay | see §91 | ☐ | | | |
+| PKI Phantom | see §91 | ☐ | | | |
+| CellXion | see §91 | ☐ | | | |
+| Sunwave | see §91 | ☐ | | | |
+| Parsons DRT | see §91 | ☐ | | | |
+| R&S TSMA6 | see §91 | ☐ | | | |
+| R&S TSME6 | see §91 | ☐ | | | |
+| ThinkRF R5500/5750 | see §91 | ☐ | | | |
+| Signal Hound SM200B | see §91 | ☐ | | | |
+| Aaronia Spectran V6 | see §91 | ☐ | | | |
+| Keysight Nemo | see §91 | ☐ | | | |
+| Anritsu field test | see §91 | ☐ | | | |
+
+</details>
+<!-- /patch:{key} -->
+
+
 Prices are indicative 2026 bands. Every catcher is quote-only. Treat as D-grade until quoted.
 
 ### 91.1 Active catchers — government tier
@@ -4810,6 +4873,35 @@ The gap in the market is between $4,000 and $20,000: too expensive for an indivi
 
 ## 92. Public Programmes and Known Deployments
 
+<!-- patch:92 -->
+<details>
+<summary><strong>Verification — §92 programme claims (B and C grades)</strong></summary>
+
+Each claim needs a primary source. Unsourced claims drop to D and say so.
+
+STATUS: UNVERIFIED
+
+| Actor | Claim as written | Grade | Primary source | Confirmed by | Date |
+|---|---|---|---|---|---|
+| US FBI | see §92 | B | | | |
+| US CBP | see §92 | B | | | |
+| US local police | see §92 | B | | | |
+| US NSA | see §92 | B | | | |
+| UK police | see §92 | B | | | |
+| UK GCHQ | see §92 | C | | | |
+| Germany BfV/BND | see §92 | C | | | |
+| France DGSE | see §92 | C | | | |
+| Israel | see §92 | C | | | |
+| China MSS | see §92 | C | | | |
+| Russia | see §92 | C | | | |
+| Canada | see §92 | B | | | |
+| Australia | see §92 | C | | | |
+| Netherlands | see §92 | B | | | |
+
+</details>
+<!-- /patch:{key} -->
+
+
 Compiled from public reporting, litigation and disclosure. Grades per §14.3.
 
 | Actor | Reported deployment | Grade |
@@ -4861,6 +4953,9 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part VIII index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 93. [3G and UMTS Specifics](#93-3g-and-umts-specifics)
 94. [Wi-Fi Calling, ePDG and IMS](#94-wi-fi-calling-epdg-and-ims)
 95. [SS7, Diameter and Core-Side Attacks](#95-ss7-diameter-and-core-side-attacks)
@@ -4874,6 +4969,8 @@ Part added in 2.0 · Compiled 2026-11-14
 103. [Non-Terrestrial Networks and Direct-to-Device](#103-non-terrestrial-networks-and-direct-to-device)
 104. [6G and the Trajectory](#104-6g-and-the-trajectory)
 105. [What Still Cannot Be Done](#105-what-still-cannot-be-done)
+
+</details>
 
 ---
 
@@ -4955,6 +5052,14 @@ There is no mature open 3G stack. If you need 3G, buy, or accept significant eng
 
 ## 94. Wi-Fi Calling, ePDG and IMS
 
+<!-- patch:img:## 94. Wi-Fi Calling, ePDG and IMS -->
+<p class="plates">
+<figure><img src="./assets/plates/asterisk.png" alt="Asterisk" width="220" loading="lazy"><figcaption>Asterisk — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
+
 Wi-Fi Calling is the largest hole in a purely cellular defence model: it takes the traffic off the radio entirely, which is good, and onto whatever Wi-Fi is present, which is not.
 
 ### 94.1 How it works
@@ -5020,6 +5125,14 @@ Full IMS is a project; §66 lists it as a non-goal for the platform build for go
 ---
 
 ## 95. SS7, Diameter and Core-Side Attacks
+
+<!-- patch:img:## 95. SS7, Diameter and Core-Side Attacks -->
+<p class="plates">
+<figure><img src="./assets/plates/kamailio.png" alt="Kamailio" width="220" loading="lazy"><figcaption>Kamailio — Wikimedia (Commons)</figcaption></figure>
+</p>
+<!-- /patch:img -->
+
+
 
 Everything so far has been radio. This section is the layer above: abuse of the core signalling network, which reaches a subscriber anywhere on earth with no proximity at all.
 
@@ -5669,6 +5782,9 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part IX index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 106. [RF Safety Incidents and Emergency Procedures](#106-rf-safety-incidents-and-emergency-procedures)
 107. [Environmental Ratings and Installation](#107-environmental-ratings-and-installation)
 108. [Supply Chain and Component Provenance](#108-supply-chain-and-component-provenance)
@@ -5682,6 +5798,8 @@ Part added in 2.0 · Compiled 2026-11-14
 116. [Retention Matrix](#116-retention-matrix)
 117. [Insurance, Liability and Complaints](#117-insurance-liability-and-complaints)
 118. [Postmortems and Lessons Learned](#118-postmortems-and-lessons-learned)
+
+</details>
 
 ---
 
@@ -6395,6 +6513,9 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part X index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 119. [Band and Frequency Reference](#119-band-and-frequency-reference)
 120. [ARFCN and EARFCN Calculators](#120-arfcn-and-earfcn-calculators)
 121. [PLMN and MCC/MNC Reference](#121-plmn-and-mccmnc-reference)
@@ -6406,9 +6527,49 @@ Part added in 2.0 · Compiled 2026-11-14
 127. [Expanded Glossary](#127-expanded-glossary)
 128. [FAQ and Troubleshooting Index](#128-faq-and-troubleshooting-index)
 
+</details>
+
 ---
 
 ## 119. Band and Frequency Reference
+
+<!-- patch:119 -->
+<details>
+<summary><strong>Verification — §119 band edges (audit run: 23 bands, 0 mismatches)</strong></summary>
+
+Re-run `tools/check_bands.py` after any edit. GSM 900 has two valid ARFCN variants; NR rows have no ARFCN.
+
+STATUS: UNVERIFIED
+
+| Band | UL | DL | ARFCN range | TS clause | Confirmed |
+|---|---|---|---|---|---|
+| GSM 850 | | | | | ☐ |
+| GSM 900 P | | | | | ☐ |
+| GSM 900 E | | | | | ☐ |
+| GSM 1800 | | | | | ☐ |
+| GSM 1900 | | | | | ☐ |
+| UMTS 1 | | | | | ☐ |
+| UMTS 2 | | | | | ☐ |
+| UMTS 5 | | | | | ☐ |
+| UMTS 8 | | | | | ☐ |
+| LTE 1 | | | | | ☐ |
+| LTE 3 | | | | | ☐ |
+| LTE 7 | | | | | ☐ |
+| LTE 8 | | | | | ☐ |
+| LTE 20 | | | | | ☐ |
+| LTE 28 | | | | | ☐ |
+| LTE 41 | | | | | ☐ |
+| NR n1 | | | | | ☐ |
+| NR n3 | | | | | ☐ |
+| NR n28 | | | | | ☐ |
+| NR n41 | | | | | ☐ |
+| NR n77 | | | | | ☐ |
+| NR n78 | | | | | ☐ |
+| NR n79 | | | | | ☐ |
+
+</details>
+<!-- /patch:{key} -->
+
 
 ### 119.1 GSM bands
 
@@ -6940,6 +7101,9 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part XI index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 129. [Site Survey Form](#129-site-survey-form)
 130. [Key-Up Authorisation Form](#130-key-up-authorisation-form)
 131. [Acceptance Certificate](#131-acceptance-certificate)
@@ -6950,6 +7114,8 @@ Part added in 2.0 · Compiled 2026-11-14
 136. [Expert Witness Checklist](#136-expert-witness-checklist)
 137. [Cross-Examination Question Bank](#137-cross-examination-question-bank)
 138. [Licence, Reuse and Credits](#138-licence-reuse-and-credits)
+
+</details>
 
 > Forms are copy-and-use. Fields in `[square brackets]` are mandatory. A form with a blank mandatory field is not complete and the corresponding gate does not pass.
 
@@ -7686,79 +7852,93 @@ Read §105 before promising anyone anything.
 
 # Appendix — Page Index and Footer Reconciliation
 
-**Purpose:** the assembled document runs to 29 pages. Footers in Parts VI–XI read "of 31" from an earlier pagination plan; the actual extent is 29. This page is the authoritative map, and it replaces the running footer count.
+**Purpose:** the assembled document runs to 34 pages. Footers in Parts VI–XI read "of 31" from an earlier pagination plan; the actual extent is 29. This page is the authoritative map, and it replaces the running footer count.
 
 | Page | Contents |
 |---|---|
-| 1 | Badges, banner, title, about this edition, caveats |
-| 2 | Table of contents, Parts I–V |
-| 3 | Table of contents, Parts VI–XI, back matter, document map, grading marks |
-| 4 | Part I index, §1 Executive Summary (§1.1 history, §1.2 categories), §2 How IMSI Catchers Operate |
-| 5 | §3 Feature and Capability Catalogue, §4 Vulnerable and Affected Devices |
-| 6 | §5 Known Limitations, §6 Myths and Misconceptions |
-| 7 | §7 Enterprise Defensive Field Guide, §8 4G/5G Security Comparison |
-| 8 | §9–§11, condensed draft (superseded by page 9) |
-| 9 | §9–§11, authoritative text |
-| 10 | §12 Anomaly Log Sheets, §13 Travel Checklist, §14 Glossary and Appendix, §15 References |
-| 11 | Part II index, §16–§20 |
-| 12 | §21–§26, end of Part II |
-| 13 | Part III index, §27–§29 |
-| 14 | §30–§34, end of Part III |
-| 15 | Part IV index, §35–§41 |
-| 16 | §42–§49, end of Part IV |
-| 17 | Part V index, §50–§58 |
-| 18 | §59–§66, end of Part V |
-| 19 | Part VI index, Plates 1–18, plate usage guide |
-| 20 | Part VII index, §83–§87 |
-| 21 | §88–§92, end of Part VII |
-| 22 | Part VIII index, §93–§98 |
-| 23 | §99–§105, end of Part VIII |
-| 24 | Part IX index, §106–§111 |
-| 25 | §112–§118, end of Part IX |
-| 26 | Part X index, §119–§128 (bands, calculators, PLMN, frame structures, link budget, antennas, sampling, glossary, FAQ) |
-| 27 | Part XI index, §129–§133 (survey, key-up, acceptance, custody, RFQ) |
-| 28 | §134–§138, back matter, change history, colophon |
-| 29 | This index, §139 About the author |
+| 1 | IMSI Catchers: Government, Enterprise, and Adversary-Platforms |
+| 2 | Table of Contents |
+| 3 | Document Map |
+| 4 | Part I — Reference and Field Guide |
+| 5 | 3. Exhaustive Feature and Capability Catalogue |
+| 6 | 5. Known Limitations and Constraints |
+| 7 | 7. Enterprise Defensive Field Guide |
+| 8 | 9. Android Hardening Guide |
+| 9 | 12. Anomaly Log Sheets |
+| 10 | Part II — Hardware, Software and Build Guides |
+| 11 | 21. Build Guide B — Bad Actor and DIY |
+| 12 | Part III — Site Survey, Core Handoff, Evidence Chain and Signalling Control |
+| 13 | 30. CDR Generation and the Evidence Chain |
+| 14 | Part IV — Build Specification, With Numbers |
+| 15 | 42. Rig Security |
+| 16 | Part V — 4G/5G Observation Platform: Full Build Guide |
+| 17 | 59. API and GUI |
+| 18 | Part VI — Visual Reference |
+| 19 | Part VII — Category Deep Dives |
+| 20 | 88. Adversary Economics |
+| 21 | Part VIII — Technical Supplements |
+| 22 | 99. Cell Broadcast and Public Warning Abuse |
+| 23 | Part IX — Programme and Operations |
+| 24 | 112. Training Curriculum |
+| 25 | Part X — Reference Annexes |
+| 26 | Part XI — Forms and Templates |
+| 27 | 134. Redaction Procedure |
+| 29 | Part XII — Appendices |
+| 30 | End of Document |
+| 31 | Appendix D — Source Fidelity and Verification Note |
+| 32 | Appendix E — Worked Case Studies |
+| 33 | Appendix F — Field Quick-Reference Card |
+| 34 | — |
 
 ### Section-to-page lookup
 
 | Sections | Page |
 |---|---|
-| 1–15 | 4–10 |
-| 16–26 | 11–12 |
-| 27–34 | 13–14 |
-| 35–49 | 15–16 |
-| 50–66 | 17–18 |
-| Plates 1–18 | 19 |
-| 83–92 | 20–21 |
-| 93–105 | 22–23 |
-| 106–118 | 24–25 |
-| 119–128 | 26 |
-| 129–133 | 27 |
-| 134–138 | 28 |
-| 139 | 29 |
+| 1–2 | 4 |
+| 3–4 | 5 |
+| 5–6 | 6 |
+| 7–8 | 7 |
+| 9–11 | 8 |
+| 12–15 | 9 |
+| 16–20 | 10 |
+| 21–26 | 11 |
+| 27–29 | 12 |
+| 30–34 | 13 |
+| 35–41 | 14 |
+| 42–49 | 15 |
+| 50–58 | 16 |
+| 59–66 | 17 |
+| 83–87 | 19 |
+| 88–92 | 20 |
+| 93–98 | 21 |
+| 99–105 | 22 |
+| 106–111 | 23 |
+| 112–118 | 24 |
+| 119–128 | 25 |
+| 129–133 | 26 |
+| 134–138 | 27 |
+| 140–144 | 29 |
 
 ### Part-to-page lookup
 
 | Part | Pages |
 |---|---|
-| Front matter | 1–3 |
-| I | 4–10 |
-| II | 11–12 |
-| III | 13–14 |
-| IV | 15–16 |
-| V | 17–18 |
-| VI | 19 |
-| VII | 20–21 |
-| VIII | 22–23 |
-| IX | 24–25 |
-| X | 26 |
-| XI | 27–28 |
-| Appendix and author | 29 |
+| I | 4 |
+| II | 10 |
+| III | 12 |
+| IV | 14 |
+| IX | 23 |
+| V | 16 |
+| VI | 18 |
+| VII | 19 |
+| VIII | 21 |
+| X | 25 |
+| XI | 26 |
+| XII | 29 |
 
 ### Footer correction
 
-Where a footer says "Page N of 31", read "Page N of 29". No content is missing; the earlier count included two pages that were later merged.
+Where a footer says "Page N of 34", read "Page N of 34". No content is missing; the earlier count included two pages that were later merged.
 
 ### Assembly note
 
@@ -7815,11 +7995,16 @@ Part added in 2.0 · Compiled 2026-11-14
 
 **Part XII index**
 
+<details class="toc">
+<summary>Show sections</summary>
+
 140. [One-Page Executive Brief](#140-one-page-executive-brief)
 141. [Repository Structure and Assembly](#141-repository-structure-and-assembly)
 142. [Build README Template](#142-build-readme-template)
 143. [Errata and Correction Procedure](#143-errata-and-correction-procedure)
 144. [Master Checklist](#144-master-checklist)
+
+</details>
 
 ---
 
@@ -8340,7 +8525,7 @@ Every soft spot above can be raised from D or C to B by one of three acts: quote
 
 ---
 
-*End of appendices. The document is complete at 32 pages; Part XII and this page extend the 29-page body and restore the original footer count of 31 plus one.*
+*End of appendices. The document is complete at 34 pages; Part XII and this page extend the 29-page body and restore the original footer count of 31 plus one.*
 
 ---
 ---
