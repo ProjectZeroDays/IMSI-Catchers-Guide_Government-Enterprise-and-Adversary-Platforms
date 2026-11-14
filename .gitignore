@@ -1,0 +1,15 @@
+# patcher artefacts
+*.bak
+*.tmp
+.patch-*
+# python
+__pycache__/
+*.py[cod]
+.venv/
+# os
+Thumbs.db
+desktop.ini
+.DS_Store
+# keep the doc, the tools and the assets
+!assets/**
+!tools/**
