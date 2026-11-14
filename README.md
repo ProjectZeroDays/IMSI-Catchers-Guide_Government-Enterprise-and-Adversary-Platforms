@@ -24,6 +24,7 @@
 
 
 
+
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
 
 ---
@@ -505,6 +506,8 @@ On LTE and 5G, a catcher generally gets metadata and identity, not plaintext, be
 
 
 
+
+
 Organised by tier of actor. Real deployments mix tiers; a nation-state suite may include commodity components.
 
 ### 3.1 Radio and physical layer
@@ -625,6 +628,8 @@ Full commercial map, price bands and procurement behaviour in §91.
 <figure><img src="./assets/plates/toggle2g.png" alt="Android 2G toggle" width="220" loading="lazy"><figcaption>Android 2G toggle — AOSP (project)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -901,6 +906,8 @@ The generational story is real: identity concealment, mutual authentication, int
 
 
 
+
+
 Ordered by effect, highest first. The first two items do most of the work.
 
 ### 9.1 Android 16+: Advanced Protection and the 2G toggle
@@ -978,6 +985,8 @@ Treat output as corroboration. The reliable pattern is: tool flags → you walk 
 <figure><img src="./assets/plates/signal.jpg" alt="Signal" width="220" loading="lazy"><figcaption>Signal — Google Play (vendor)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -1347,6 +1356,8 @@ Sections 17 to 20 are reference material. Sections 21 to 23 are build guides. Re
 
 
 
+
+
 Every category draws from these pools. Specific part numbers differ; the function does not.
 
 ### 17.1 Radio front ends
@@ -1431,6 +1442,8 @@ Every build guide below is a variation on this diagram. The differences are powe
 <figure><img src="./assets/plates/sm200b.jpg" alt="Signal Hound SM200B" width="220" loading="lazy"><figcaption>Signal Hound SM200B — Signal Hound (vendor)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -1529,6 +1542,8 @@ Purpose-built appliances. Public detail is thin; capability claims outrun docume
 <figure><img src="./assets/plates/qgis.webp" alt="QGIS" width="220" loading="lazy"><figcaption>QGIS — QGIS project (project)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -1636,6 +1651,8 @@ Rated by whether it builds and runs today. "Works" means a competent operator ca
 <figure><img src="./assets/plates/rtlsdr.jpg" alt="RTL-SDR dongle" width="220" loading="lazy"><figcaption>RTL-SDR dongle — retail listing (seller)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -1779,6 +1796,8 @@ Point `enb.conf` at your Open5GS PLMN, set `mme_list` to the local address, star
 
 
 
+
+
 **Goal:** continuous, calibrated observation without transmitting. No licence needed.
 
 **Hardware:** ThinkRF R5500/R5750 or R&S TSMA6, PoE switch, GNSS time server, mast or vehicle mount, LNA, rack.
@@ -1848,6 +1867,8 @@ A passive sensor cannot tell you a tower is fake. It tells you a tower is *new* 
 <figure><img src="./assets/plates/tower.jpg" alt="Lattice tower" width="220" loading="lazy"><figcaption>Lattice tower — stock (stock)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -2087,6 +2108,8 @@ The honest summary: the RF and core layers are solved in free software. The proc
 
 
 
+
+
 A site survey is the difference between a deployment that collects and one that jams itself, alerts every handset in range, and produces artefacts nobody can defend. Budget a week per site. Do not skip because you are impatient.
 
 ### 28.1 Phase 0 — Desk study
@@ -2237,6 +2260,8 @@ Repeat the Phase 5 checks after 1 hour, 24 hours and 7 days. Log the delta. A de
 <figure><img src="./assets/plates/kamailio.png" alt="Kamailio" width="220" loading="lazy"><figcaption>Kamailio — Wikimedia (Commons)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -2404,6 +2429,8 @@ Expect three to six months of engineering for a stable relay.
 <figure><img src="./assets/plates/openssl.png" alt="OpenSSL" width="220" loading="lazy"><figcaption>OpenSSL — Wikimedia (Commons)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -2976,6 +3003,8 @@ Output power folds back, the SDR drops USB, or the box cooks in summer. Symptom 
 
 
 
+
+
 ### Spec
 
 LTE and NR need frequency accuracy better than 0.05 ppm and phase alignment. Without it, handsets see the cell and refuse to camp.
@@ -3465,6 +3494,8 @@ flowchart TB
 
 
 
+
+
 ### 52.1 Primary SDR
 
 | Option | Band | Duplex | Max rate | 5G 100 MHz? | Price | Verdict |
@@ -3520,6 +3551,8 @@ HackRF (half duplex, 20 MS/s). Any USB 2.0 SDR. Raspberry Pi 4 as host for anyth
 <figure><img src="./assets/plates/open5gs.png" alt="Open5GS" width="220" loading="lazy"><figcaption>Open5GS — project site (project)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -3771,6 +3804,8 @@ flowchart LR
 
 
 
+
+
 ### 57.1 Capture
 
 ```bash
@@ -3958,6 +3993,8 @@ Dark by default. Monospace for identifiers. Sticky headers. Keyboard: `/` search
 <figure><img src="./assets/plates/prometheus.png" alt="Prometheus" width="220" loading="lazy"><figcaption>Prometheus — Wikimedia (Commons)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -4922,6 +4959,7 @@ STATUS: UNVERIFIED
 
 
 
+
 Prices are indicative 2026 bands. Every catcher is quote-only. Treat as D-grade until quoted.
 
 ### 91.1 Active catchers — government tier
@@ -5026,6 +5064,7 @@ STATUS: UNVERIFIED
 
 </details>
 <!-- /patch:92 -->
+
 
 
 
@@ -5192,6 +5231,8 @@ There is no mature open 3G stack. If you need 3G, buy, or accept significant eng
 
 
 
+
+
 Wi-Fi Calling is the largest hole in a purely cellular defence model: it takes the traffic off the radio entirely, which is good, and onto whatever Wi-Fi is present, which is not.
 
 ### 94.1 How it works
@@ -5263,6 +5304,8 @@ Full IMS is a project; §66 lists it as a non-goal for the platform build for go
 <figure><img src="./assets/plates/kamailio.png" alt="Kamailio" width="220" loading="lazy"><figcaption>Kamailio — Wikimedia (Commons)</figcaption></figure>
 </p>
 <!-- /patch:img -->
+
+
 
 
 
@@ -6705,6 +6748,7 @@ STATUS: UNVERIFIED
 
 </details>
 <!-- /patch:119 -->
+
 
 
 
