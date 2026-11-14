@@ -7950,7 +7950,7 @@ Footers carry the live total; there is no legacy count left to reconcile. Page 2
 
 ### Assembly note
 
-Concatenate in page order. Page 8 and page 9 both carry §9–§11; keep both, or delete page 8 and renumber from there. If you delete page 8, the extent becomes 33 and every later page shifts by one — the section-to-page table above stays correct because it keys on sections, not footers.
+Concatenate in page order. The superseded draft page has been deleted, so §9–§11 occupy a single page and there is no duplicate left to reconcile. The extent is 34.
 
 ---
 
@@ -8475,17 +8475,16 @@ Build the rig if you want. Apply the mitigations whether you build or not. Keep 
 | 5 | §3–§4 | V+ | Added §3.8 pointer to §91, §4.4 unhardened classes, §4.5 register fields |
 | 6 | §5–§6 | V+ | Added §5.4 synthesis, §6.1 why myths persist |
 | 7 | §7–§8 | V | Unchanged apart from renumbering |
-| 8 | §9–§11 | C | Early working draft. Superseded by page 9; keep or delete |
-| 9 | §9–§11 | V | Authoritative |
-| 10 | §12–§15 | V | Verbatim, including the four-grade confidence scale |
-| 11 | §16–§20 | V | Renumbered; "see 6.8" → §21.8 |
-| 12 | §21–§26 | V | Renumbered |
-| 13 | §27–§29 | V | Renumbered |
-| 14 | §30–§34 | V | Renumbered |
-| 15 | §35–§41 | V | Renumbered |
-| 16 | §42–§49 | V | Renumbered; "§10 tests" → §44, "Volume II §6" → §21 |
-| 17 | §50–§58 | V | Renumbered; "Volume III §4" → §30 |
-| 18 | §59–§66 | V | Renumbered; "Volume I Appendix B" → §14.3 |
+| 8 | §9–§11 | V | Renumbered |
+| 9 | §12–§15 | V | Verbatim, including the four-grade confidence scale |
+| 10 | §16–§20 | V | Renumbered; "see 6.8" → §21.8 |
+| 11 | §21–§26 | V | Renumbered |
+| 12 | §27–§29 | V | Renumbered |
+| 13 | §30–§34 | V | Renumbered |
+| 14 | §35–§41 | V | Renumbered |
+| 15 | §42–§49 | V | Renumbered; "§10 tests" → §44, "Volume II §6" → §21 |
+| 16 | §50–§58 | V | Renumbered; "Volume III §4" → §30 |
+| 17 | §59–§66 | V | Renumbered; "Volume I Appendix B" → §14.3 |
 | 18 | Plates 1–18 | N | Generated plates 1–2; plates 3–18 sourced per §138.3 |
 | 19–20 | §83–§92 | N | Category studies. Draws on §3.6, §3.7, §24, §65 |
 | 21–22 | §93–§105 | N | Technical supplements. §97 expands §2.7; §100 expands §58; §101 expands §6 |
