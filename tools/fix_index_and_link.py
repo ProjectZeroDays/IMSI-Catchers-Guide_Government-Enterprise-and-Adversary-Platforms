@@ -98,7 +98,7 @@ def main() -> int:
 
     print("[2/4] close the index hole and shift D.2")
     for old, new in FIXES:
-        if new in text and old not in text:
+        if new in text:
             print("     already current")
             continue
         if old not in text:

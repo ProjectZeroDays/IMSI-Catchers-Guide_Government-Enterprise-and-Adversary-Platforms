@@ -7925,7 +7925,6 @@ Read §105 before promising anyone anything.
 | 129–133 | 26 |
 | 134–138 | 27 |
 | 139 | 28 |
-| 139 | 28 |
 | 140–144 | 29 |
 
 ### Part-to-page lookup
@@ -7947,7 +7946,7 @@ Read §105 before promising anyone anything.
 
 ### Footer correction
 
-Footers carry the live total; there is no legacy count left to reconcile. Page 28 is this page; §139 follows on it. Page 28 is this page; §139 follows on it.
+Footers carry the live total; there is no legacy count left to reconcile. Page 28 is this page; §139 follows on it.
 
 ### Assembly note
 
