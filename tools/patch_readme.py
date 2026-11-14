@@ -46,7 +46,7 @@ UNVER = "STATUS: UNVERIFIED"
 IMG_TAG = re.compile(r'<img src="(https://[^"]+)"')
 PLATE_EXT = (".png", ".jpg", ".jpeg", ".webp")
 VERIFY_KEYS = ("91", "92", "119")
-VERIFY_STRIP = re.compile(r"<!-- patch:(91|92|119) -->.*?<!-- /patch:(?:\1|\{key\}) -->\n\n?", re.S)
+VERIFY_STRIP = re.compile(r"\n*<!-- patch:(91|92|119) -->.*?<!-- /patch:(?:\1|\{key\}) -->\n*", re.S)
 LABEL = re.compile(r"^\*\*(.+?)\*\*\s*$", re.MULTILINE)
 ENTRY = re.compile(r"^(?:\d+\.|-)\s*\[[^\]]+\]\(#[^)]+\)$")
 FRONTBACK = ("#about-this-edition", "#document-map",
@@ -251,7 +251,9 @@ def build_toc(text: str) -> str:
     body = re.sub(r"<summary>(.*?)</summary>", r"**\1**", body, flags=re.S)
     body = re.sub(r"</?summary>", "", body)
     body = re.sub(r"</?strong>", "", body)
-    body = FOOTER.sub("", body)
+    body = re.sub(r"\n*\*Version [\d.]+ · Page \d+ of \d+\.(?:[^*\n]*)\*", "", body)
+    body = body.rstrip()
+    body = re.sub(r"---\n---\n\s*$", "", body)
     body = body.split("## Table of Contents", 1)[-1]
 
     labels = list(LABEL.finditer(body))
@@ -309,7 +311,7 @@ def local_src(k: str) -> str:
 
 
 def inject_images(text: str, allow: set[str]) -> str:
-    text = re.sub(r"<!-- patch:img:[^>]*-->.*?<!-- /patch:img -->\n\n?", "", text, flags=re.S)
+    text = re.sub(r"\n*<!-- patch:img:[^>]*-->.*?<!-- /patch:img -->\n*", "", text, flags=re.S)
     for anchor, keys in ANCHORS.items():
         if anchor not in text:
             print(f"warn: anchor missing {anchor}", file=sys.stderr)
@@ -380,7 +382,7 @@ BANDS = ["GSM 850", "GSM 900 P", "GSM 900 E", "GSM 1800", "GSM 1900", "UMTS 1", 
 def block(key: str, title: str, why: str, hdr: str, rows: list[str]) -> str:
     return (f"<!-- patch:{key} -->\n<details>\n<summary><strong>{title}</strong></summary>\n\n{why}\n\n{UNVER}\n\n"
             f"{hdr}\n|---|---|---|---|---|---|\n" + "\n".join(rows) +
-            f"\n\n</details>\n<!-- /patch:{key} -->\n")
+            f"\n\n</details>\n<!-- /patch:{key} -->\n\n")
 
 
 def inject_verify(text: str) -> str:
@@ -421,12 +423,15 @@ def ledger(root: Path, text: str) -> None:
 
 
 def status(text: str, total: int) -> str:
-    text = re.sub(r"<!-- patch:status -->.*?<!-- /patch:status -->\n\n?", "", text, flags=re.S)
+    text = re.sub(r"\n*<!-- patch:status -->.*?<!-- /patch:status -->\n*", "", text, flags=re.S)
     n = len(re.findall(UNVER, text))
     hot = len(IMG_TAG.findall(text))
     blk = (f"<!-- patch:status -->\n> **Release status.** {total} pages · {n} verification block(s) outstanding · "
            f"{hot} hotlink(s) · images injected where anchored.\n"
            f"> `--check` is green only at zero outstanding and zero hotlinks.\n<!-- /patch:status -->\n\n")
+    a = "---\n\n## About this edition"
+    if a in text:
+        return text.replace(a, "\n\n" + blk + a, 1)
     m = re.search(r"^(# IMSI Catcher[^\n]*\n)", text, re.MULTILINE)
     return text[:m.end()] + "\n" + blk + text[m.end():] if m else blk + text
 
