@@ -7859,7 +7859,7 @@ Read §105 before promising anyone anything.
 
 # Appendix — Page Index and Footer Reconciliation
 
-**Purpose:** the assembled document runs to 34 pages. Every footer is generated from the live page total and is correct. This page is the authoritative map.
+**Purpose:** the assembled document runs to 34 pages. Every footer is generated from the live page total and is correct. This page is the authoritative map, and it lists itself on page 28 so the numbering runs without a hole.
 
 | Page | Contents |
 |---|---|
@@ -7890,6 +7890,7 @@ Read §105 before promising anyone anything.
 | 25 | Part X — Reference Annexes |
 | 26 | Part XI — Forms and Templates |
 | 27 | 134. Redaction Procedure |
+| 28 | Appendix — Page Index; 139. About the author |
 | 29 | Part XII — Appendices |
 | 30 | End of Document |
 | 31 | Appendix D — Source Fidelity and Verification Note |
@@ -7923,6 +7924,8 @@ Read §105 before promising anyone anything.
 | 119–128 | 25 |
 | 129–133 | 26 |
 | 134–138 | 27 |
+| 139 | 28 |
+| 139 | 28 |
 | 140–144 | 29 |
 
 ### Part-to-page lookup
@@ -7944,7 +7947,7 @@ Read §105 before promising anyone anything.
 
 ### Footer correction
 
-Footers carry the live total; there is no legacy count left to reconcile.
+Footers carry the live total; there is no legacy count left to reconcile. Page 28 is this page; §139 follows on it. Page 28 is this page; §139 follows on it.
 
 ### Assembly note
 
@@ -8484,13 +8487,13 @@ Build the rig if you want. Apply the mitigations whether you build or not. Keep 
 | 16 | §42–§49 | V | Renumbered; "§10 tests" → §44, "Volume II §6" → §21 |
 | 17 | §50–§58 | V | Renumbered; "Volume III §4" → §30 |
 | 18 | §59–§66 | V | Renumbered; "Volume I Appendix B" → §14.3 |
-| 19 | Plates 1–18 | N | Generated plates 1–2; plates 3–18 sourced per §138.3 |
-| 20–21 | §83–§92 | N | Category studies. Draws on §3.6, §3.7, §24, §65 |
-| 22–23 | §93–§105 | N | Technical supplements. §97 expands §2.7; §100 expands §58; §101 expands §6 |
-| 24–25 | §106–§118 | N | Programme and operations |
-| 26 | §119–§128 | N | Band tables from TS 45.005, TS 36.101, TS 38.104; formulas standard |
-| 27–28 | §129–§138 | N | Forms, disclosure, expert witness, licence |
-| 29–32 | Appendix, author, Part XII, this page | N | — |
+| 18 | Plates 1–18 | N | Generated plates 1–2; plates 3–18 sourced per §138.3 |
+| 19–20 | §83–§92 | N | Category studies. Draws on §3.6, §3.7, §24, §65 |
+| 21–22 | §93–§105 | N | Technical supplements. §97 expands §2.7; §100 expands §58; §101 expands §6 |
+| 23–24 | §106–§118 | N | Programme and operations |
+| 25 | §119–§128 | N | Band tables from TS 45.005, TS 36.101, TS 38.104; formulas standard |
+| 26–27 | §129–§138 | N | Forms, disclosure, expert witness, licence |
+| 28–31 | Appendix, author, Part XII, this page | N | — |
 
 ### D.3 What to verify before citing
 

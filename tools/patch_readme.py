@@ -215,12 +215,10 @@ def rebuild_index(pages: list[str]) -> list[str]:
     if idx is None:
         print("warn: no page index", file=sys.stderr)
         return pages
-    rows = [f"| {i + 1} | {head(p)} |" for i, p in enumerate(pages) if i != idx and head(p) != "—"]
+    rows = [f"| {i + 1} | {head(p)} |" for i, p in enumerate(pages) if head(p) != "—"]
     sec: dict[int, list[int]] = {}
     part: dict[str, list[int]] = {}
     for i, p in enumerate(pages):
-        if i == idx:
-            continue
         for m in SEC.finditer(p):
             sec.setdefault(i + 1, []).append(int(m.group(1)))
         for m in re.finditer(r"^# Part ([IVX]+)", p, re.MULTILINE):
