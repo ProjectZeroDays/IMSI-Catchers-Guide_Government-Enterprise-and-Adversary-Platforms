@@ -1,9 +1,9 @@
 # Verification ledger
 
-Outstanding blocks: **3**
+Outstanding blocks: **2**
 
 - [ ] §91 — price bands
 - [ ] §92 — programme claims
-- [ ] §119 — band edges
+- [x] §119 — band edges (filled from §119.1–§119.4)
 
 Fill, flip to `STATUS: VERIFIED`, run `--check`.

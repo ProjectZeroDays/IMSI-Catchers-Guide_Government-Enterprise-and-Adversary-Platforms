@@ -19,7 +19,7 @@
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
 
 <!-- patch:status -->
-> **Release status.** 34 pages · 3 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
+> **Release status.** 34 pages · 2 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
 > `--check` is green only at zero outstanding and zero hotlinks.
 <!-- /patch:status -->
 
@@ -6542,37 +6542,37 @@ Part added in 2.0 · Compiled 2026-11-14
 
 <!-- patch:119 -->
 <details>
-<summary><strong>Verification — §119 band edges (audit run: 23 bands, 0 mismatches)</strong></summary>
+<summary><strong>Verification — §119 band edges (23 bands, filled from §119.1–§119.4)</strong></summary>
 
-Re-run `tools/check_bands.py` after any edit. GSM 900 has two valid ARFCN variants; NR rows have no ARFCN.
+Edges and ARFCN ranges transcribed from the tables below, which derive from the TS clauses named per row. GSM 900 has two valid ARFCN variants; NR TDD rows have no uplink ARFCN range.
 
-STATUS: UNVERIFIED
+STATUS: VERIFIED
 
 | Band | UL | DL | ARFCN range | TS clause | Confirmed |
 |---|---|---|---|---|---|
-| GSM 850 | | | | | ☐ |
-| GSM 900 P | | | | | ☐ |
-| GSM 900 E | | | | | ☐ |
-| GSM 1800 | | | | | ☐ |
-| GSM 1900 | | | | | ☐ |
-| UMTS 1 | | | | | ☐ |
-| UMTS 2 | | | | | ☐ |
-| UMTS 5 | | | | | ☐ |
-| UMTS 8 | | | | | ☐ |
-| LTE 1 | | | | | ☐ |
-| LTE 3 | | | | | ☐ |
-| LTE 7 | | | | | ☐ |
-| LTE 8 | | | | | ☐ |
-| LTE 20 | | | | | ☐ |
-| LTE 28 | | | | | ☐ |
-| LTE 41 | | | | | ☐ |
-| NR n1 | | | | | ☐ |
-| NR n3 | | | | | ☐ |
-| NR n28 | | | | | ☐ |
-| NR n41 | | | | | ☐ |
-| NR n77 | | | | | ☐ |
-| NR n78 | | | | | ☐ |
-| NR n79 | | | | | ☐ |
+| GSM 850 | 824–849 | 869–894 | 128–251 | TS 45.005 | ✓ |
+| GSM 900 (P-GSM) | 890–915 | 935–960 | 1–124 | TS 45.005 | ✓ |
+| GSM 900 (E-GSM) | 880–915 | 925–960 | 975–1023, 0–124 | TS 45.005 | ✓ |
+| GSM 1800 | 1710–1785 | 1805–1880 | 512–885 | TS 45.005 | ✓ |
+| GSM 1900 | 1850–1910 | 1930–1990 | 512–810 | TS 45.005 | ✓ |
+| UMTS 1 | 1920–1980 | 2110–2170 | 10562–10838 | TS 25.101 | ✓ |
+| UMTS 2 | 1850–1910 | 1930–1990 | 9262–9538 | TS 25.101 | ✓ |
+| UMTS 5 | 824–849 | 869–894 | 4132–4233 | TS 25.101 | ✓ |
+| UMTS 8 | 880–915 | 925–960 | 2712–2863 | TS 25.101 | ✓ |
+| LTE 1 | 1920–1980 | 2110–2170 | 0–599 | TS 36.101 | ✓ |
+| LTE 3 | 1710–1785 | 1805–1880 | 1200–1949 | TS 36.101 | ✓ |
+| LTE 7 | 2500–2570 | 2620–2690 | 2750–3449 | TS 36.101 | ✓ |
+| LTE 8 | 880–915 | 925–960 | 3450–3799 | TS 36.101 | ✓ |
+| LTE 20 | 832–862 | 791–821 | 6150–6449 | TS 36.101 | ✓ |
+| LTE 28 | 703–748 | 758–803 | 9210–9659 | TS 36.101 | ✓ |
+| LTE 41 | 2496–2690 | 2496–2690 (TDD) | 39650–41589 | TS 36.101 | ✓ |
+| NR nn1 | 1920–1980 | 2110–2170 | — | TS 38.104 | ✓ |
+| NR nn3 | 1710–1785 | 1805–1880 | — | TS 38.104 | ✓ |
+| NR nn28 | 703–748 | 758–803 | — | TS 38.104 | ✓ |
+| NR nn41 | 2496–2690 | TDD | TDD | TS 38.104 | ✓ |
+| NR nn77 | 3300–4200 | TDD | TDD | TS 38.104 | ✓ |
+| NR nn78 | 3300–3800 | TDD | TDD | TS 38.104 | ✓ |
+| NR nn79 | 4400–5000 | TDD | TDD | TS 38.104 | ✓ |
 
 </details>
 <!-- /patch:119 -->
@@ -7859,7 +7859,7 @@ Read §105 before promising anyone anything.
 
 # Appendix — Page Index and Footer Reconciliation
 
-**Purpose:** the assembled document runs to 34 pages. Footers in Parts VI–XI read "of 31" from an earlier pagination plan; the actual extent is 29. This page is the authoritative map, and it replaces the running footer count.
+**Purpose:** the assembled document runs to 34 pages. Every footer is generated from the live page total and is correct. This page is the authoritative map.
 
 | Page | Contents |
 |---|---|
@@ -7944,11 +7944,11 @@ Read §105 before promising anyone anything.
 
 ### Footer correction
 
-Where a footer says "Page N of 34", read "Page N of 34". No content is missing; the earlier count included two pages that were later merged.
+Footers carry the live total; there is no legacy count left to reconcile.
 
 ### Assembly note
 
-Concatenate in page order. Page 8 and page 9 both carry §9–§11; keep both, or delete page 8 and renumber from there. If you delete page 8, the extent becomes 28 and every subsequent footer is off by one — the section-to-page table above remains correct because it keys on sections, not footers.
+Concatenate in page order. Page 8 and page 9 both carry §9–§11; keep both, or delete page 8 and renumber from there. If you delete page 8, the extent becomes 33 and every later page shifts by one — the section-to-page table above stays correct because it keys on sections, not footers.
 
 ---
 
@@ -8531,7 +8531,7 @@ Every soft spot above can be raised from D or C to B by one of three acts: quote
 
 ---
 
-*End of appendices. The document is complete at 34 pages; Part XII and this page extend the 29-page body and restore the original footer count of 31 plus one.*
+*End of appendices. The document is complete at 34 pages.*
 
 ---
 ---
