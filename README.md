@@ -14,13 +14,9 @@
 
 ![Project banner](./assets/banner.png)
 
-# IMSI Catcher Platforms — Combined Edition
+# IMSI Catchers: Government, Enterprise, and Adversary-Platforms
 
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
-
-Combined document version 2.0 · Compiled 2026-11-14
-Source volumes compiled 2026-11-13 · Scope: GSM through 5G SA and NTN
-Supersedes: *IMSI Catchers: Government, Enterprise and Adversary Platforms* v1.1, companion Volumes II–V, and combined edition v1.1
 
 ---
 
