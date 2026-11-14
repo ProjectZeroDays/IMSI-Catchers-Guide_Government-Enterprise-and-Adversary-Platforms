@@ -7,14 +7,20 @@
   --toc        rebuild the TOC as nested collapsible sections
   --verify     inject verification blocks, ledger, status banner
   --validate   HTTP-check every manifest URL, drop the dead ones
-  --check      exit 1 while unverified or hotlinked
+  --check      exit 1 while unverified or hotlinked, exit 2 while broken
   --all        everything except --validate
+  --run        --all, then --check against the written file
 
 Idempotent. Every insertion is marker-fenced and replaced, never appended.
 
-2.4  build_toc strips its own tags before parsing, so re-runs do not gut the
-     TOC; do_assets honours a local file under any plate extension; both
-     injectors strip globally before inserting; --check reports marker counts.
+2.5  block() closes inside the f-string, so the close tag is a real key and
+     never a literal; inject_verify strips both the keyed and the literal
+     form. build_toc unwraps <summary> back to bold so a rebuild parses its
+     own output instead of silently skipping, keeps bullet entries as well as
+     numbered ones so part indexes and Part VI survive, and appends the TOC
+     footer. The page index sorts parts numerically and never emits an empty
+     row. --check gates on literal keys, front/back matter links and a TOC
+     block floor, and returns 1 for outstanding work and 2 for structure.
 """
 
 from __future__ import annotations
@@ -29,7 +35,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-VERSION = "2.4"
+VERSION = "2.5"
 SEP = "\n---\n---\n"
 FOOTER = re.compile(r"\*Version [\d.]+ · Page \d+ of \d+\.(?:[^*\n]*)\*")
 SUPERSEDED = "condensed working draft"
@@ -40,6 +46,16 @@ UNVER = "STATUS: UNVERIFIED"
 IMG_TAG = re.compile(r'<img src="(https://[^"]+)"')
 PLATE_EXT = (".png", ".jpg", ".jpeg", ".webp")
 VERIFY_KEYS = ("91", "92", "119")
+VERIFY_STRIP = re.compile(r"<!-- patch:(91|92|119) -->.*?<!-- /patch:(?:\1|\{key\}) -->\n\n?", re.S)
+LABEL = re.compile(r"^\*\*(.+?)\*\*\s*$", re.MULTILINE)
+ENTRY = re.compile(r"^(?:\d+\.|-)\s*\[[^\]]+\]\(#[^)]+\)$")
+FRONTBACK = ("#about-this-edition", "#document-map",
+             "#consolidated-references-index", "#change-history")
+PART6 = "#part-vi--visual-reference"
+TOC_FLOOR = 13  # front matter + eleven parts + back matter
+
+ROMAN = {r: i for i, r in enumerate(
+    ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"], start=1)}
 
 # ---- validated image manifest -------------------------------------------------
 # (key, url, alt, credit, licence)  — validated by --validate before use
@@ -131,7 +147,18 @@ def die(m: str) -> None:
 
 def head(p: str) -> str:
     m = H.search(p)
-    return m.group(0).lstrip("# ").strip() if m else "—"
+    if m:
+        t = m.group(0).lstrip("# ").strip()
+        if t:
+            return t
+    for line in p.splitlines():
+        s = line.strip()
+        if not s or s.startswith("![") or s.startswith("<") or s.startswith("---"):
+            continue
+        s = s.lstrip("*> ").strip()
+        if s:
+            return s[:80]
+    return "—"
 
 
 def ranges(ns: list[int]) -> str:
@@ -168,12 +195,27 @@ def fix_counts(t: str, total: int) -> str:
     return re.sub(r"Page N of \d+", f"Page N of {total}", t)
 
 
+def fix_version(t: str) -> str:
+    t = re.sub(r"badge/version-[\d.]+-", f"badge/version-{VERSION}-", t, count=1)
+    t = re.sub(r"This is \d+\.\d+\.", f"This is {VERSION}.", t, count=1)
+    return t
+
+
+def add_changelog(t: str) -> str:
+    row = (f"| {VERSION} | 2026-11-14 | TOC rebuilt across front matter, all parts and back matter; "
+           f"verify markers made keyed and idempotent; page index sorted numerically |\n")
+    if f"| {VERSION} |" in t:
+        return t
+    m = re.search(r"^\| 2\.0 \| 2026-11-14 \|.*\n", t, re.MULTILINE)
+    return t[:m.end()] + row + t[m.end():] if m else t
+
+
 def rebuild_index(pages: list[str]) -> list[str]:
     idx = next((i for i, p in enumerate(pages) if INDEX_RE.search(p)), None)
     if idx is None:
         print("warn: no page index", file=sys.stderr)
         return pages
-    rows = [f"| {i + 1} | {head(p)} |" for i, p in enumerate(pages) if i != idx]
+    rows = [f"| {i + 1} | {head(p)} |" for i, p in enumerate(pages) if i != idx and head(p) != "—"]
     sec: dict[int, list[int]] = {}
     part: dict[str, list[int]] = {}
     for i, p in enumerate(pages):
@@ -189,7 +231,8 @@ def rebuild_index(pages: list[str]) -> list[str]:
     p = re.sub(r"\| Sections \| Page \|\n\|---\|---\|\n(?:\|.*\n)+",
                "| Sections | Page |\n|---|---|\n" + "\n".join(f"| {ranges(v)} | {k} |" for k, v in sorted(sec.items())) + "\n", p, count=1)
     p = re.sub(r"\| Part \| Pages \|\n\|---\|---\|\n(?:\|.*\n)+",
-               "| Part | Pages |\n|---|---|\n" + "\n".join(f"| {k} | {ranges(v)} |" for k, v in sorted(part.items())) + "\n", p, count=1)
+               "| Part | Pages |\n|---|---|\n" + "\n".join(
+                   f"| {k} | {ranges(v)} |" for k, v in sorted(part.items(), key=lambda kv: ROMAN.get(kv[0], 99))) + "\n", p, count=1)
     pages[idx] = p
     return pages
 
@@ -202,28 +245,40 @@ def build_toc(text: str) -> str:
         print("warn: TOC region not found", file=sys.stderr)
         return text
     body = text[start:end]
-    # strip what a previous pass added, so the labels are bare again
+    # undo what a previous pass added, so labels and entries are bare again
     body = re.sub(r"<style>.*?</style>", "", body, flags=re.S)
     body = re.sub(r"</?details[^>]*>", "", body)
+    body = re.sub(r"<summary>(.*?)</summary>", r"**\1**", body, flags=re.S)
     body = re.sub(r"</?summary>", "", body)
+    body = re.sub(r"</?strong>", "", body)
     body = FOOTER.sub("", body)
+    body = body.split("## Table of Contents", 1)[-1]
 
-    parts = re.split(r"^\*\*(Part [IVX]+ — [^\n*]+)\*\*\s*$", body, flags=re.MULTILINE)
+    labels = list(LABEL.finditer(body))
+    if not labels:
+        print("warn: no TOC labels found", file=sys.stderr)
+        return text
+    blocks: list[tuple[str, list[str]]] = []
+    for i, m in enumerate(labels):
+        title = m.group(1).strip()
+        nxt = labels[i + 1].start() if i + 1 < len(labels) else len(body)
+        entries = [ln.strip() for ln in body[m.end():nxt].splitlines()
+                   if ENTRY.match(ln.strip())]
+        blocks.append((title, entries))
+
     out = ["## Table of Contents\n", TOC_CSS]
-    for i in range(1, len(parts), 2):
-        title, chunk = parts[i], parts[i + 1]
-        secs = re.findall(r"^\s*(\d+)\.\s*\[([^\]]+)\]\(#([^)]+)\)\s*$", chunk, re.MULTILINE)
-        out.append(f"<details class=\"toc\">\n<summary>{title}</summary>\n")
-        for num, label, anchor in secs:
-            out.append(f"{num}. [{label}](#{anchor})\n")
-        out.append("\n</details>\n")
+    for title, entries in blocks:
+        out.append(f'<details class="toc">\n<summary>{title}</summary>\n\n')
+        out.extend(f"{e}\n" for e in entries)
+        out.append("\n</details>\n\n")
     out.append(f"\n*Version {VERSION} · Page 0 of 0. Next page: document map.*\n")
-    text = text[:start] + "".join(out) + "\n---\n---\n\n" + text[end:]
+    text = text[:start] + "".join(out) + "---\n---\n\n" + text[end:]
 
     def wrap_idx(m: re.Match) -> str:
         items = "".join(f"{n}. [{l}](#{a})\n" for n, l, a in
                         re.findall(r"^(\d+)\. \[([^\]]+)\]\(#([^)]+)\)\s*$", m.group(2), re.MULTILINE))
-        return f"**Part {m.group(1)} index**\n\n<details class=\"toc\">\n<summary>Show sections</summary>\n\n{items}\n</details>\n"
+        return (f"**Part {m.group(1)} index**\n\n<details class=\"toc\">\n"
+                f"<summary>Show sections</summary>\n\n{items}\n</details>\n")
 
     return re.sub(r"\*\*Part ([IVX]+) index\*\*\n\n((?:\d+\. \[[^\n]*\n)+)", wrap_idx, text)
 
@@ -324,7 +379,8 @@ BANDS = ["GSM 850", "GSM 900 P", "GSM 900 E", "GSM 1800", "GSM 1900", "UMTS 1", 
 
 def block(key: str, title: str, why: str, hdr: str, rows: list[str]) -> str:
     return (f"<!-- patch:{key} -->\n<details>\n<summary><strong>{title}</strong></summary>\n\n{why}\n\n{UNVER}\n\n"
-            f"{hdr}\n|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n</details>\n<!-- /patch:{key} -->\n")
+            f"{hdr}\n|---|---|---|---|---|---|\n" + "\n".join(rows) +
+            f"\n\n</details>\n<!-- /patch:{key} -->\n")
 
 
 def inject_verify(text: str) -> str:
@@ -345,7 +401,7 @@ def inject_verify(text: str) -> str:
                      "| Band | UL | DL | ARFCN range | TS clause | Confirmed |",
                      [f"| {b} | | | | | ☐ |" for b in BANDS]),
     }
-    text = re.sub(r"<!-- patch:(?:91|92|119) -->.*?<!-- /patch:(?:91|92|119) -->\n\n?", "", text, flags=re.S)
+    text = VERIFY_STRIP.sub("", text)
     for k, a in A.items():
         if a not in text:
             print(f"warn: anchor §{k} missing", file=sys.stderr)
@@ -393,6 +449,41 @@ def save(path: Path, text: str) -> None:
         raise
 
 
+def check(text: str) -> int:
+    """1 = outstanding work, 2 = structural break, 0 = clean."""
+    n = len(re.findall(UNVER, text))
+    hot = len(IMG_TAG.findall(text))
+    miss = [k for k in M if f'./assets/plates/{k}' in text
+            and not any((Path("assets") / "plates" / f"{k}{e}").exists() for e in PLATE_EXT)]
+    dup = {k: len(re.findall(rf"<!-- patch:{k} -->", text)) for k in VERIFY_KEYS}
+    tocs = len(re.findall(r'<details class="toc">', text))
+    literal = text.count("{key}")
+    fb = {a: (a in text) for a in FRONTBACK}
+    p6 = PART6 in text
+    print(f"unverified={n} hotlinks={hot} missing_assets={len(miss)} toc_blocks={tocs}")
+    print(f"markers={dup}")
+    print(f"literal_key={literal} part6={p6} frontback_links={all(fb.values())}")
+    broken = []
+    if literal:
+        broken.append(f"{literal} literal {{key}} close tag(s)")
+    if not p6:
+        broken.append("TOC missing Part VI")
+    if not all(fb.values()):
+        broken.append(f"TOC missing front/back links {[a for a, v in fb.items() if not v]}")
+    if tocs < TOC_FLOOR:
+        broken.append(f"toc_blocks {tocs} below floor {TOC_FLOOR}")
+    for k, c in dup.items():
+        if c > 1:
+            broken.append(f"duplicate §{k} block x{c}")
+    for k in miss:
+        broken.append(f"missing asset {k}")
+    for b in broken:
+        print(f"  {b}", file=sys.stderr)
+    if broken:
+        return 2
+    return 1 if (n or hot) else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", type=Path, default=Path("README.md"))
@@ -404,6 +495,7 @@ def main() -> int:
     ap.add_argument("--no-net", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--run", action="store_true")
     a = ap.parse_args()
 
     for s in (sys.stdout, sys.stderr):
@@ -415,21 +507,7 @@ def main() -> int:
     text = a.src.read_text(encoding="utf-8")
 
     if a.check:
-        n = len(re.findall(UNVER, text))
-        hot = len(IMG_TAG.findall(text))
-        miss = [k for k in M if f'./assets/plates/{k}' in text
-                and not any((Path("assets") / "plates" / f"{k}{e}").exists() for e in PLATE_EXT)]
-        dup = {k: len(re.findall(rf"<!-- patch:{k} -->", text)) for k in VERIFY_KEYS}
-        tocs = len(re.findall(r'<details class="toc">', text))
-        print(f"unverified={n} hotlinks={hot} missing_assets={len(miss)} toc_blocks={tocs}")
-        print(f"markers={dup}")
-        for k, c in dup.items():
-            if c > 1:
-                print(f"  DUPLICATE §{k} block x{c}", file=sys.stderr)
-        for k in miss:
-            print(f"  missing {k}", file=sys.stderr)
-        bad = n or hot or miss or any(c > 1 for c in dup.values()) or tocs < 8
-        return 1 if bad else 0
+        return check(text)
 
     root = Path.cwd()
     allow = set(M)
@@ -439,27 +517,29 @@ def main() -> int:
         print(f"validated {len(good)} ok, {len(badk)} dead", file=sys.stderr)
         (root / "dead-images.txt").write_text("\n".join(badk) + "\n", encoding="utf-8")
 
-    do = a.all or a.fix_page8 or a.assets or a.images or a.toc or a.verify
+    do = a.all or a.run or a.fix_page8 or a.assets or a.images or a.toc or a.verify
     if not do:
         die("nothing to do; use --all or a specific flag")
 
     pages = text.split(SEP)
     before = len(pages)
-    if a.all or a.fix_page8:
+    if a.all or a.run or a.fix_page8:
         pages, removed = fix_page8(pages, a.keep_page8)
         text = SEP.join(pages)
         print(f"pages {before} -> {len(pages)} (removed {removed})", file=sys.stderr)
-    if a.all or a.toc:
+    if a.all or a.run or a.toc:
         text = build_toc(text)
-    if a.all or a.fix_page8 or a.toc:
+    if a.all or a.run or a.fix_page8 or a.toc:
         pages = rebuild_index(renumber(text.split(SEP)))
         text = fix_counts(SEP.join(pages), len(pages))
-    if a.all or a.assets:
+    text = fix_version(text)
+    text = add_changelog(text)
+    if a.all or a.run or a.assets:
         if not a.dry_run:
             do_assets(root, allow)
-    if a.all or a.images:
+    if a.all or a.run or a.images:
         text = inject_images(text, allow)
-    if a.all or a.verify:
+    if a.all or a.run or a.verify:
         text = inject_verify(text)
 
     text = status(text, len(text.split(SEP)))
@@ -468,8 +548,11 @@ def main() -> int:
     if a.dry_run:
         print("dry run: only VERIFY.md written", file=sys.stderr)
         return 0
-    save(a.out or a.src, text)
-    print(f"wrote {a.out or a.src} ({len(text)} chars)", file=sys.stderr)
+    target = a.out or a.src
+    save(target, text)
+    print(f"wrote {target} ({len(text)} chars)", file=sys.stderr)
+    if a.run:
+        return check(target.read_text(encoding="utf-8"))
     return 0
 
 
