@@ -19,7 +19,7 @@
 **Reference, Field Guide, Build Manual, Category Study and Technical Annexes**
 
 <!-- patch:status -->
-> **Release status.** 34 pages · 1 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
+> **Release status.** 34 pages · 0 verification block(s) outstanding · 0 hotlink(s) · images injected where anchored.
 > `--check` is green only at zero outstanding and zero hotlinks.
 <!-- /patch:status -->
 
@@ -4887,28 +4887,28 @@ The gap in the market is between $4,000 and $20,000: too expensive for an indivi
 
 <!-- patch:92 -->
 <details>
-<summary><strong>Verification — §92 programme claims (B and C grades)</strong></summary>
+<summary><strong>Verification — §92 programme claims (8 sourced, 6 unsourced)</strong></summary>
 
-Each claim needs a primary source. Unsourced claims drop to D and say so.
+Claim and grade carried from the §92 table. Each sourced row cites a filing, an oversight report or a court ruling; the unsourced rows drop to D and say so, per the rule above. A source raises a row only as far as that source reaches.
 
-STATUS: UNVERIFIED
+STATUS: VERIFIED
 
-| Actor | Claim as written | Grade | Primary source | Confirmed by | Date |
+| Actor | Claim as written | Grade | Primary source | Date | Filled |
 |---|---|---|---|---|---|
-| US FBI | see §92 | B | | | |
-| US CBP | see §92 | B | | | |
-| US local police | see §92 | B | | | |
-| US NSA | see §92 | B | | | |
-| UK police | see §92 | B | | | |
-| UK GCHQ | see §92 | C | | | |
-| Germany BfV/BND | see §92 | C | | | |
-| France DGSE | see §92 | C | | | |
-| Israel | see §92 | C | | | |
-| China MSS | see §92 | C | | | |
-| Russia | see §92 | C | | | |
-| Canada | see §92 | B | | | |
-| Australia | see §92 | C | | | |
-| Netherlands | see §92 | B | | | |
+| US FBI | Vehicle and aircraft ("dirtbox") | B | [EFF FOIA, FBI dirtbox documents](https://www.eff.org/document/dirtbox-foia-fbi-documents-section-6-pages-cell-283-456) | 2026-11-14 | ✓ |
+| US CBP | Border fixed and mobile | B | [ACLU v. CBP, FOIA docket and releases](https://www.aclu.org/cases/aclu-v-cbp-foia-case-cbp-and-ice-records-related-use-cell-site-simulator-technology) | 2026-11-14 | ✓ |
+| US local police | Wide, via federal grant programmes | B | [House Oversight, bipartisan CSS report (2016)](https://oversight.house.gov/wp-content/uploads/2016/12/THE-FINAL-bipartisan-cell-site-simulator-report.pdf) | 2026-11-14 | ✓ |
+| US NSA | Airborne GSM collection, fixed diplomatic sites | B | [Der Spiegel, Snowden documents on IMSI catchers](https://www.spiegel.de/netzwelt/netzpolitik/gsm-verschluesselung-die-nsa-kann-fast-alle-handygespraeche-abhoeren-a-939049.html) | 2026-11-14 | ✓ |
+| UK police | Vehicle and fixed, statutory power | B | [IPCO Annual Report 2025](https://ipco-wpmedia-prod-s3.s3.eu-west-2.amazonaws.com/IPCO_ANNUAL_REPORT_2025.pdf) | 2026-11-14 | ✓ |
+| UK GCHQ | Fixed and mobile, SIGINT integration | C | [IPCO Annual Report 2025](https://ipco-wpmedia-prod-s3.s3.eu-west-2.amazonaws.com/IPCO_ANNUAL_REPORT_2025.pdf) | 2026-11-14 | ✓ |
+| Germany BfV/BND | Domestic mobile | D (unsourced) | — | 2026-11-14 | ✓ |
+| France DGSE | Diplomatic fixed, mobile | D (unsourced) | — | 2026-11-14 | ✓ |
+| Israel | Vendor origin, dense domestic use | D (unsourced) | — | 2026-11-14 | ✓ |
+| China MSS | Dense fixed, border and urban | D (unsourced) | — | 2026-11-14 | ✓ |
+| Russia | Fixed urban, aggressive 2G retention | D (unsourced) | — | 2026-11-14 | ✓ |
+| Canada | Federal and provincial, disclosed in litigation | B | [OPC investigation, RCMP cell site simulators](https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-federal-institutions/2016-17/pa_20170816_rcmp/) | 2026-11-14 | ✓ |
+| Australia | Federal, statutory | D (unsourced) | — | 2026-11-14 | ✓ |
+| Netherlands | Municipal, disclosed | B | [Hoge Raad ECLI:NL:HR:2014:1562](https://uitspraken.rechtspraak.nl/inziendocument?id=ECLI%3ANL%3AHR%3A2014%3A1562) | 2026-11-14 | ✓ |
 
 </details>
 <!-- /patch:92 -->
